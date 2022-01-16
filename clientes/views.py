@@ -1,3 +1,4 @@
+import pkgutil
 from django.shortcuts import redirect, render
 from clientes.models import Clientes, Maquinarias, Arreglo_Maquinarias
 #Funciones para Pestaña de Arreglos
@@ -55,3 +56,23 @@ def arreglos_editados(request,id,idmaquina):
 
 
 #FIN Funciones para Pestaña de Arreglos
+
+# funciones para pestaña de maquinarias
+
+def maquinarias(request):
+    clientes = Clientes.objects.all()
+    maquinarias = Maquinarias.objects.all()
+    return render(request, 'maquinarias.html', {"maquinarias": maquinarias,"clientes": clientes})
+
+def agregar_maquinas(request):
+    propietario = Clientes.objects.get(pk = request.POST["propietario"])
+    tipo = request.POST['tipo']
+    modelo = request.POST['modelo']
+    marca = request.POST['marca']
+    maquinarias = Maquinarias.objects.create(
+        propietario = propietario,
+        tipo = tipo,
+        modelo = modelo,
+        marca = marca,
+    )
+    return redirect('../maquinarias')
