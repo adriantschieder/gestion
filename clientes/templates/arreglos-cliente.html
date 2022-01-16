@@ -1,0 +1,132 @@
+{% extends "./base.html" %}
+{% block head%}<title>Arreglos</title>{%endblock%}
+{% block body%}
+<div class="col-12 ">
+    <div class="row my-auto" mx-3>
+        <h2 class="p-3 text-white col-11">Listado de Arreglos</h2>
+        <p class="col-1 text-center"><a href="" data-toggle="modal" data-target="#agregar{{arreglos.id}}" class="text-success"><i class="fas fa-plus-square fa-3x"></i></a></p>
+    </div>
+      <!-- Modal Añadir-->
+<div class="modal fade" id="agregar{{arreglos.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Agregar Arreglo para: {{maquinarias}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="{% url 'arreglos-agregados' maquinarias.id %}" class="form-group" method="POST">
+        {% csrf_token %}
+        <div class="modal-body">
+          <div class="form-group row justify-content-center">
+            <label>Empresa: &nbsp</label>
+            <input type="text" name="propietario" class="form-control mt-1 col-8" value="{{maquinarias.propietario}}" readonly >
+          </div>
+          <div class="form-group row justify-content-center">
+            <label>Maquinaria: &nbsp</label>
+            <input type="text" name="maquinaria" class="form-control mt-1 col-8" value="{{maquinarias.id}}" readonly >
+          </div>
+          <div class="form-group row justify-content-center">
+            <label>Fecha: <i>(formato válido YYYY-MM-DD) &nbsp</i></label>
+            <input type="text" name="fecha_arreglo" class="form-control mt-1 col-4" value="">
+          </div>
+          <div class="form-group">
+            <label>Detalles: </label>
+            <textarea name="arreglo" rows="6" cols="60" class="" placeholder="Ingrese aqui sus comentarios"></textarea>
+          </div>         
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="sudmit" class="btn btn-primary">Guardar Cambios</button>
+        </div>
+      </form> 
+    </div>
+  </div>
+</div>
+    <table class="table col-12 text-center table-bordered table-light table-hover">
+        <thead class="bg-info text-white">
+            <tr>
+                <th class="col-2">Maquinaria</th>
+                <th class="col-1">Fecha</th>
+                <th class="col-8">Arreglo</th>
+                <th colspan="2" class="col-1">Opciones</th>
+            </tr>
+        </thead>
+        {% for arreglos in arreglos %}
+        <tbody class="">
+            <tr>
+                <td> {{ arreglos.maquinaria}} </td>
+                <td> {{ arreglos.fecha_arreglo}} </td>
+                <td> {{ arreglos.arreglo}} </td>
+                <td><a href="" data-toggle="modal" data-target="#eliminar{{arreglos.id}}" class="btn btn-danger" title="Eliminar"><i class="far fa-trash-alt"></i></a></td>
+                <td><a href="#arreglos{{arreglos.id}}" data-toggle="modal" data-target="#arreglos{{arreglos.id}}" class="btn btn-success" title="Arreglos"><i class="fas fa-eye"></i></a></td>
+            </tr>
+        </tbody>
+        <!-- Modal Editar-->
+<div class="modal fade" id="arreglos{{arreglos.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar Arreglo de {{arreglos.maquinaria}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="{% url 'arregloseditados' arreglos.id maquinarias.id %}" class="form-group" method="POST">
+        {% csrf_token %}
+        <div class="modal-body">
+          <div class="form-group row justify-content-center">
+            <label>Empresa: &nbsp</label>
+            <input type="text" name="propietario" class="form-control mt-1 col-8" value="{{maquinarias.propietario}}" readonly >
+          </div>
+          <div class="form-group row justify-content-center">
+            <label>Maquinaria: &nbsp</label>
+            <input type="text" name="maquinaria" class="form-control mt-1 col-8" value="{{maquinarias.id}}" readonly >
+          </div>
+          <div class="form-group row justify-content-center">
+            <label>Fecha: <i>(formato válido YYYY-MM-DD) &nbsp</i></label>
+            <input type="text" name="fecha_arreglo" class="form-control mt-1 col-4" value="{{arreglos.fecha_arreglo}}">
+          </div>
+          <div class="form-group">
+            <label>Detalles: </label>
+            <textarea name="arreglo" rows="6" cols="60" class="">{{arreglos.arreglo}}</textarea>
+          </div>         
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+        </div>
+      </form> 
+    </div>
+  </div>
+</div>
+<!-- Modal Eliminar-->
+<div class="modal fade" id="eliminar{{arreglos.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Eliminar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="{% url 'eliminar-arreglo' arreglos.id maquinarias.id %}" class="form-group" method="GET">   
+        <div class="modal-body">
+          <div class="justify-content-center">
+            <p>Realmente desea Eliminar este arreglo?</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="sudmit" class="btn btn-danger">Eliminar</button>
+        </div>
+      </form> 
+    </div>
+  </div>
+</div>
+        {% endfor %}
+        </table>
+</div>
+
+{%endblock%}
