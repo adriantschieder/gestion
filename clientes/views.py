@@ -11,11 +11,6 @@ def arreglos_cliente(request,id):
     arreglos = Arreglo_Maquinarias.objects.filter(maquinaria=id)
     return render(request, 'arreglos-cliente.html', {"arreglos": arreglos, "maquinarias": maquinarias})
 
-# def arreglos_agregar(request,idmaquina):
-#     maquinarias = Maquinarias.objects.get(id=idmaquina)
-#     arreglos = Arreglo_Maquinarias.objects.all()
-#     return render(request, 'arreglos-agregar.html', {"arreglos": arreglos, "maquinarias": maquinarias})
-
 def arreglos_agregados(request):
     maquinarias = Arreglo_Maquinarias.objects.get(pk = request.POST['maquinarias'])
     fecha_arreglo = request.POST['fecha_arreglo']
@@ -26,11 +21,6 @@ def arreglos_agregados(request):
         arreglo = arreglo1,
     )
     return redirect('../arreglos')
-
-# def arreglos_agregar(request,idmaquina):
-#     maquinarias = Maquinarias.objects.get(id=idmaquina)
-#     arreglos = Arreglo_Maquinarias.objects.all
-#     return render(request, 'arreglos-agregar.html', {"arreglos": arreglos, "maquinarias": maquinarias})
 
 def agregar_arreglos_clientes(request,id):
     maquinaria = Maquinarias.objects.get(pk = request.POST['maquinaria'])
