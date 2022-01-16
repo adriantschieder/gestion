@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import Clientes, Maquinarias, Arreglo_Maquinarias
 
-# Register your models here.
+admin.site.register(Clientes)
+admin.site.register(Maquinarias)
+admin.site.register(Arreglo_Maquinarias)

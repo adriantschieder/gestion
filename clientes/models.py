@@ -32,3 +32,6 @@ class Arreglo_Maquinarias(models.Model):
     fecha_arreglo = models.DateField(auto_now=True)
     arreglo = models.CharField(max_length=200)
 
+    def __str__(self) -> str:
+        return f'{self.maquinaria} => Fecha: {self.fecha_arreglo}'
+

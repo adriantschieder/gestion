@@ -11,9 +11,7 @@ from .views import (
 urlpatterns = [
      path('arreglos/',arreglos, name ='arreglos'),
      path('arreglos-cliente/<id>', arreglos_cliente, name = 'arreglosclientes'),
-     # path('arreglos-agregar/<idmaquina>', arreglos_agregar, name = 'agregar-arreglos'),
      path('arreglos-agregados/<int:id>',agregar_arreglos_clientes, name='arreglos-agregados'),
-     # path('ver-arreglos/<id>/<idmaquina>', editar_arreglos_cliente, name = 'ver arreglos'),
      path('arreglos-editados/<id>/<idmaquina>', arreglos_editados, name='arregloseditados'),
      path('eliminar-arreglo/<id>/<idmaquina>', eliminar_arreglo, name = 'eliminar-arreglo'),
 
