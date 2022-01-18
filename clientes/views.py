@@ -83,7 +83,6 @@ def agregar_maquinas(request):
     )
     return redirect('../maquinarias')
 
-<<<<<<< HEAD
 def agregar_maquinas_clientes(request,id):
     propietario = Clientes.objects.get(pk = request.POST['propietario']) #el problema era que obtenia un string y no lo tomaba como una instancia
     tipo = request.POST['tipo']
@@ -142,7 +141,6 @@ def eliminar_maquinaria(request,id,idpropietario):
     maquinarias = Maquinarias.objects.get(id=id)
     maquinarias.delete()
     return redirect(f'/clientes/maquinarias-cliente/{idpropietario}')
-=======
 
     #Funciones para Pestaña de Clientes
 def clientes(request):
@@ -186,14 +184,8 @@ class Client_delete(DeleteView):
      
 #FIN Funciones para Pestaña de Clientes
 
-
-
-<<<<<<< HEAD
-=======
 def eliminar(request,id):
     cliente = Clientes.objects.get(id=id)
     cliente.delete()
     return redirect('../listado')    
 #FIN Funciones para Pestaña de Clientes
->>>>>>> 02d47141d600a0461c0d7b724db3a5388e586835
->>>>>>> 5961947dd33ad7d9d696b7253bde6e8d014f9a9d
