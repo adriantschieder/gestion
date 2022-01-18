@@ -1,9 +1,12 @@
-from pickle import GET
+# from pickle import GET
 from django.db.models import Q
-import pkgutil
-from urllib import request
+# import pkgutil
+# from urllib import request
 from django.shortcuts import redirect, render
 from clientes.models import Clientes, Maquinarias, Arreglo_Maquinarias
+from django.views.generic.edit import DeleteView, UpdateView
+from django.urls import reverse_lazy
+
 #Funciones para Pestaña de Arreglos
 def arreglos(request):
     arreglos = Arreglo_Maquinarias.objects.all()
@@ -80,7 +83,6 @@ def agregar_maquinas(request):
     )
     return redirect('../maquinarias')
 
-<<<<<<< HEAD
 def agregar_maquinas_clientes(request,id):
     propietario = Clientes.objects.get(pk = request.POST['propietario']) #el problema era que obtenia un string y no lo tomaba como una instancia
     tipo = request.POST['tipo']
@@ -138,4 +140,56 @@ def editar_maquinarias_cliente(request,id):
 def eliminar_maquinaria(request,id,idpropietario):
     maquinarias = Maquinarias.objects.get(id=id)
     maquinarias.delete()
+<<<<<<< HEAD
     return redirect(f'/clientes/maquinarias-cliente/{idpropietario}')
+=======
+    return redirect(f'/clientes/maquinarias-cliente/{idpropietario}')
+
+    #Funciones para Pestaña de Clientes
+def clientes(request):
+    abuscar = request.GET.get("clientebuscado")
+    cliente = Clientes.objects.all()
+
+    if abuscar:
+        cliente = Clientes.objects.filter(
+            Q(empresa__icontains = abuscar) |
+            Q(cuit__icontains = abuscar) |
+            Q(domicilio__icontains = abuscar)
+        ).distinct()
+
+    return render(request, 'clientes.html', {"clientes":cliente})
+
+def create(request):
+    empresa = request.POST['empresa']
+    condicion_iva = request.POST['iva']
+    domicilio = request.POST['domicilio']
+    telefono = request.POST['telefono']
+    mail = request.POST['mail']
+    cuit = request.POST['cuit']
+    clientes = Clientes.objects.create(
+        empresa = empresa,
+        condicion_iva = condicion_iva,
+        cuit = cuit,
+        domicilio = domicilio,
+        telefono = telefono,
+        mail = mail,
+    )
+    return redirect('../listado')
+class Client_edit(UpdateView):
+    model = Clientes
+    success_url = "/clientes/listado/"
+    fields = ['id','empresa','domicilio','condicion_iva','cuit','telefono','mail']
+    template_name="clientes_form.html"
+class Client_delete(DeleteView):
+    model = Clientes
+    success_url = "/clientes/listado/"
+    template_name = "clientes_confirm_delete.html"
+     
+#FIN Funciones para Pestaña de Clientes
+
+def eliminar(request,id):
+    cliente = Clientes.objects.get(id=id)
+    cliente.delete()
+    return redirect('../listado')    
+#FIN Funciones para Pestaña de Clientes
+>>>>>>> 92ed95c095826cfd3fcd46f5454fe69055693569

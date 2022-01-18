@@ -60,14 +60,14 @@
                         <td> {{ clientes.domicilio}} </td>
                         <td> {{ clientes.telefono}} </td>
                         <td> {{ clientes.mail}} </td>
-                        <td><a href="../clientes-editar/{{clientes.id}}" class="btn btn-success"><i class="fas fa-pen"></i></a></td>
-                        <td><a href="../eliminar/{{clientes.id}}" class="btn btn-danger"><i class="far fa-trash-alt"></i></a></td>
+                        <td><a href="{% url 'edit' clientes.id %}" class="btn btn-success"><i class="fas fa-pen"></i></a></td>
+                        <td><a href="{% url 'delete' clientes.id %}" class="btn btn-danger"><i class="far fa-trash-alt"></i></a></td>
                         <td><a href="../maquinarias-cliente/{{clientes.id}}" class="btn btn-primary"><i class="fas fa-tractor"></i></a></td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
-<div>
+</div>
 {%endblock%}
     

@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import (
      #funciones de Clientes
-     clientes,clientes_editar,clientes_editados,create,eliminar,
+     Client_delete, Client_edit, clientes,create,
      #funciones de Maquinarias
      maquinarias,agregar_maquinas,editar_maquinarias,maquinaria_editada2,maquinarias_cliente,eliminar_maquinaria,maquinaria_editada,
      editar_maquinarias_cliente,agregar_maquinas_clientes,
@@ -17,10 +17,8 @@ urlpatterns = [
      path('arreglos-editados/<id>/<idmaquina>', arreglos_editados, name='arregloseditados'),
      path('eliminar-arreglo/<id>/<idmaquina>', eliminar_arreglo, name = 'eliminar-arreglo'),
      #------------------------------------------------------------
-<<<<<<< HEAD
      path('maquinarias/', maquinarias, name='maquinarias'),
      path('agregar_maquinarias/', agregar_maquinas),
-     
      path('agregar_maquinarias_cliente/<id>', agregar_maquinas_clientes),
      path('maquinarias-cliente/<id>', maquinarias_cliente),
      path('eliminar_maquinaria/<id>/<idpropietario>',eliminar_maquinaria),
@@ -29,15 +27,11 @@ urlpatterns = [
      path('maquinaria_editada/<idmaquina>/<idpropietario>', maquinaria_editada),
      path('maquinaria_editada2/<idmaquina>', maquinaria_editada2),
      path('maquinarias-cliente/<id>', maquinarias_cliente),
-     ]
-=======
      path ("maquinarias/", maquinarias, name = "maquinarias"),
      path ("agregar_maquinarias/", agregar_maquinas),
      #------------------------------------------------------------
      path('listado/', clientes, name='clientes'),
-     path('clientes-editar/<id>', clientes_editar),
-     path('clientes-editados/<id>', clientes_editados),
      path('add/', create),
-     path('eliminar/<id>', eliminar),
+     path('client-edit/<pk>/', Client_edit.as_view(), name="edit"), 
+     path('client-delete/<pk>/', Client_delete.as_view(), name="delete"),
 ]
->>>>>>> 02d47141d600a0461c0d7b724db3a5388e586835
