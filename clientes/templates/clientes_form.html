@@ -7,8 +7,17 @@
         <div class="col-md-4 offset-md-4 text-white">
             <h2>Editar Cliente</h2>
             <p class="warning">Todos los campos son obligatorios</p>
-            <form action="../clientes-editados/{{clientes.id}}" class="form-group" method="POST">
+            <form method="POST" >
                 {% csrf_token %}
+                {{form.as_p}}
+                <button type="submit" class="btn btn-success aling-center px-5 m-3">Editar</button>
+
+            </form>
+
+
+            <!--<form action="../clientes-editados/{{clientes.id}}" class="form-group" method="POST">
+                {% csrf_token %}
+            
                 <div class="row col-md-12">
                     <p class="text-white col-2 my-auto">ID: </p>
                     <input type="text" name="id" class="form-control mt-1 bg-muted col-4" value="{{clientes.id}}" readonly>
@@ -34,6 +43,7 @@
                 <input type="text" name="mail" class="form-control mt-1" value="{{clientes.mail}}">
                 <button class="btn btn-success aling-center px-5 mt-3">Editar</button>
             </form>
+            -->
         </div>
         
 {%endblock%}

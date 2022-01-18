@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import (
      #funciones de Clientes
-     clientes,clientes_editar,clientes_editados,create,eliminar,
+     Client_delete, Client_edit, clientes,create,
      #funciones de Maquinarias
      maquinarias,agregar_maquinas,
 
@@ -20,8 +20,7 @@ urlpatterns = [
      path ("agregar_maquinarias/", agregar_maquinas),
      #------------------------------------------------------------
      path('listado/', clientes, name='clientes'),
-     path('clientes-editar/<id>', clientes_editar),
-     path('clientes-editados/<id>', clientes_editados),
      path('add/', create),
-     path('eliminar/<id>', eliminar),
+     path('client-edit/<pk>/', Client_edit.as_view(), name="edit"), 
+     path('client-delete/<pk>/', Client_delete.as_view(), name="delete"),
 ]

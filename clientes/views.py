@@ -1,9 +1,12 @@
-from pickle import GET
+# from pickle import GET
 from django.db.models import Q
-import pkgutil
-from urllib import request
+# import pkgutil
+# from urllib import request
 from django.shortcuts import redirect, render
 from clientes.models import Clientes, Maquinarias, Arreglo_Maquinarias
+from django.views.generic.edit import DeleteView, UpdateView
+from django.urls import reverse_lazy
+
 #Funciones para Pestaña de Arreglos
 def arreglos(request):
     arreglos = Arreglo_Maquinarias.objects.all()
@@ -95,28 +98,6 @@ def clientes(request):
 
     return render(request, 'clientes.html', {"clientes":cliente})
 
-def clientes_editar(request,id):
-    clientes = Clientes.objects.get(id=id)
-    return render(request, 'clientes-editar.html', {"clientes": clientes})
-
-def clientes_editados(request,id):
-    id = request.POST['id']
-    empresa = request.POST['empresa']
-    condicion_iva = request.POST['iva']
-    cuit = request.POST['cuit']
-    domicilio = request.POST['domicilio']
-    telefono = request.POST['telefono']
-    mail = request.POST['mail']
-    clientes = Clientes.objects.get(id=id)
-    clientes.empresa = empresa
-    clientes.condicion_iva = condicion_iva
-    clientes.cuit = cuit
-    clientes.domicilio = domicilio
-    clientes.telefono = telefono
-    clientes.mail = mail
-    clientes.save()
-    return redirect('../listado')
-
 def create(request):
     empresa = request.POST['empresa']
     condicion_iva = request.POST['iva']
@@ -133,9 +114,17 @@ def create(request):
         mail = mail,
     )
     return redirect('../listado')
-
-def eliminar(request,id):
-    cliente = Clientes.objects.get(id=id)
-    cliente.delete()
-    return redirect('../listado')    
+class Client_edit(UpdateView):
+    model = Clientes
+    success_url = "/clientes/listado/"
+    fields = ['id','empresa','domicilio','condicion_iva','cuit','telefono','mail']
+    template_name="clientes_form.html"
+class Client_delete(DeleteView):
+    model = Clientes
+    success_url = "/clientes/listado/"
+    template_name = "clientes_confirm_delete.html"
+     
 #FIN Funciones para Pestaña de Clientes
+
+
+
