@@ -1,4 +1,7 @@
+from pickle import GET
+from django.db.models import Q
 import pkgutil
+from urllib import request
 from django.shortcuts import redirect, render
 from clientes.models import Clientes, Maquinarias, Arreglo_Maquinarias
 #Funciones para Pestaña de Arreglos
@@ -77,6 +80,7 @@ def agregar_maquinas(request):
     )
     return redirect('../maquinarias')
 
+<<<<<<< HEAD
 def agregar_maquinas_clientes(request,id):
     propietario = Clientes.objects.get(pk = request.POST['propietario']) #el problema era que obtenia un string y no lo tomaba como una instancia
     tipo = request.POST['tipo']
@@ -135,3 +139,64 @@ def eliminar_maquinaria(request,id,idpropietario):
     maquinarias = Maquinarias.objects.get(id=id)
     maquinarias.delete()
     return redirect(f'/clientes/maquinarias-cliente/{idpropietario}')
+=======
+
+    #Funciones para Pestaña de Clientes
+def clientes(request):
+    abuscar = request.GET.get("clientebuscado")
+    cliente = Clientes.objects.all()
+
+    if abuscar:
+        cliente = Clientes.objects.filter(
+            Q(empresa__icontains = abuscar) |
+            Q(cuit__icontains = abuscar) |
+            Q(domicilio__icontains = abuscar)
+        ).distinct()
+
+    return render(request, 'clientes.html', {"clientes":cliente})
+
+def clientes_editar(request,id):
+    clientes = Clientes.objects.get(id=id)
+    return render(request, 'clientes-editar.html', {"clientes": clientes})
+
+def clientes_editados(request,id):
+    id = request.POST['id']
+    empresa = request.POST['empresa']
+    condicion_iva = request.POST['iva']
+    cuit = request.POST['cuit']
+    domicilio = request.POST['domicilio']
+    telefono = request.POST['telefono']
+    mail = request.POST['mail']
+    clientes = Clientes.objects.get(id=id)
+    clientes.empresa = empresa
+    clientes.condicion_iva = condicion_iva
+    clientes.cuit = cuit
+    clientes.domicilio = domicilio
+    clientes.telefono = telefono
+    clientes.mail = mail
+    clientes.save()
+    return redirect('../listado')
+
+def create(request):
+    empresa = request.POST['empresa']
+    condicion_iva = request.POST['iva']
+    domicilio = request.POST['domicilio']
+    telefono = request.POST['telefono']
+    mail = request.POST['mail']
+    cuit = request.POST['cuit']
+    clientes = Clientes.objects.create(
+        empresa = empresa,
+        condicion_iva = condicion_iva,
+        cuit = cuit,
+        domicilio = domicilio,
+        telefono = telefono,
+        mail = mail,
+    )
+    return redirect('../listado')
+
+def eliminar(request,id):
+    cliente = Clientes.objects.get(id=id)
+    cliente.delete()
+    return redirect('../listado')    
+#FIN Funciones para Pestaña de Clientes
+>>>>>>> 02d47141d600a0461c0d7b724db3a5388e586835
