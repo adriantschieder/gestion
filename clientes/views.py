@@ -76,3 +76,62 @@ def agregar_maquinas(request):
         marca = marca,
     )
     return redirect('../maquinarias')
+
+def agregar_maquinas_clientes(request,id):
+    propietario = Clientes.objects.get(pk = request.POST['propietario']) #el problema era que obtenia un string y no lo tomaba como una instancia
+    tipo = request.POST['tipo']
+    modelo = request.POST['modelo']
+    marca = request.POST['marca']
+    maquinarias = Maquinarias.objects.create(
+        propietario = propietario,
+        tipo = tipo,
+        modelo = modelo,
+        marca = marca,
+    )
+    return redirect(f'../maquinarias-cliente/{id}')
+
+def maquinarias_cliente(request,id):
+    clientes = Clientes.objects.get(id=id)
+    maquinarias = Maquinarias.objects.filter(propietario_id=id)
+    return render(request, 'maquinarias-cliente.html', {"maquinarias": maquinarias,"clientes": clientes})
+
+def editar_maquinarias(request,id):
+    maquinarias = Maquinarias.objects.get(id=id)
+    return render (request, "editar_maquinarias.html", {"maquinarias": maquinarias})
+
+def editar_maquinarias_cliente(request,id):
+    maquinarias = Maquinarias.objects.get(id=id)
+    return render(request, 'editar_maquinarias_cliente.html', {"maquinarias": maquinarias})
+
+def maquinaria_editada(request,idmaquina,idpropietario):
+    propietario1 = request.POST['propietario']
+    tipo = request.POST['tipo']
+    modelo = request.POST['modelo']
+    marca = request.POST['marca']
+    maquinarias = Maquinarias.objects.get(id=idmaquina)
+    maquinarias.tipo = tipo
+    maquinarias.modelo = modelo
+    maquinarias.marca = marca
+    maquinarias.save()
+    return redirect(f'/clientes/maquinarias-cliente/{idpropietario}')
+
+def maquinaria_editada2(request,idmaquina):
+    propietario = request.POST['propietario']
+    tipo = request.POST['tipo']
+    modelo = request.POST['modelo']
+    marca = request.POST['marca']
+    maquinarias = Maquinarias.objects.get(id=idmaquina)
+    maquinarias.tipo = tipo
+    maquinarias.modelo = modelo
+    maquinarias.marca = marca
+    maquinarias.save()
+    return redirect(f'/clientes/maquinarias/')
+
+def editar_maquinarias_cliente(request,id):
+    maquinarias = Maquinarias.objects.get(id=id)
+    return render(request, 'editar_maquinarias_cliente.html', {"maquinarias": maquinarias})
+
+def eliminar_maquinaria(request,id,idpropietario):
+    maquinarias = Maquinarias.objects.get(id=id)
+    maquinarias.delete()
+    return redirect(f'/clientes/maquinarias-cliente/{idpropietario}')
