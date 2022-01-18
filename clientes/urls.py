@@ -18,11 +18,10 @@ urlpatterns = [
      #------------------------------------------------------------
      path ("maquinarias/", maquinarias, name = "maquinarias"),
      path ("agregar_maquinarias/", agregar_maquinas),
+     #------------------------------------------------------------
      path('listado/', clientes, name='clientes'),
      path('clientes-editar/<id>', clientes_editar),
      path('clientes-editados/<id>', clientes_editados),
      path('add/', create),
      path('eliminar/<id>', eliminar),
-
-
 ]

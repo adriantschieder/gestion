@@ -32,7 +32,13 @@
         </form>
     </div>
     <div class="col-10 p-1">
-        <h2 class="p-3 text-white">Tabla de Clientes Actualizada</h2>
+        <div class="d-flex justify-content-md-between mb-3 col-10">
+            <h2 class="text-white">Tabla de Clientes Actualizada</h2>
+            <form class="d-flex justify-content-end" method="GET">
+                <input class="form-control me-2" type="search" name="clientebuscado" placeholder="Buscar Cliente..." aria-label="Search" value={{request.GET.clientebuscado}}>
+                <button class="btn btn-success ml-3" type="submit">Buscar</button>
+            </form>
+        </div>
         <table class="table text-center table-bordered table-light table-hover">
             <thead class="bg-info text-white">
                 <tr>

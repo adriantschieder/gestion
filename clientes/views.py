@@ -1,4 +1,7 @@
+from pickle import GET
+from django.db.models import Q
 import pkgutil
+from urllib import request
 from django.shortcuts import redirect, render
 from clientes.models import Clientes, Maquinarias, Arreglo_Maquinarias
 #Funciones para Pestaña de Arreglos
@@ -80,8 +83,17 @@ def agregar_maquinas(request):
 
     #Funciones para Pestaña de Clientes
 def clientes(request):
-    clientes = Clientes.objects.all()
-    return render(request, 'clientes.html', {"clientes": clientes})
+    abuscar = request.GET.get("clientebuscado")
+    cliente = Clientes.objects.all()
+
+    if abuscar:
+        cliente = Clientes.objects.filter(
+            Q(empresa__icontains = abuscar) |
+            Q(cuit__icontains = abuscar) |
+            Q(domicilio__icontains = abuscar)
+        ).distinct()
+
+    return render(request, 'clientes.html', {"clientes":cliente})
 
 def clientes_editar(request,id):
     clientes = Clientes.objects.get(id=id)
@@ -125,5 +137,5 @@ def create(request):
 def eliminar(request,id):
     cliente = Clientes.objects.get(id=id)
     cliente.delete()
-    return redirect('../listado')
+    return redirect('../listado')    
 #FIN Funciones para Pestaña de Clientes
