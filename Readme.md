@@ -17,7 +17,10 @@ Pero si accede desde el icono maquinarias que se encuentra en Clientes, en ese c
 Desde el panel Arreglos, solo podrá visualizar los arreglos de las distintas maquinarias. Para crear, editar o eliminar, solo se podrá hacer eligiendo
 la maquinaria en la cual se va a efectuar el arreglo. Para ello, puede ir desde Maquinarias, o través del Cliente > Maquinarias-Cliente
 
+#IMPORTANTE:
+
+La app blog es para el proyecto final.
 ## Trabajan en este proyecto 🛠️
 * Adrian Tschieder - Trabajo Inicial y Arreglos - adriantschieder
-* Andres Scheffer - Maquinarias - 
+* Andres Scheffer - Maquinarias - adrielscheffer
 * Bautista - Clientes - 

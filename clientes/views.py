@@ -76,3 +76,54 @@ def agregar_maquinas(request):
         marca = marca,
     )
     return redirect('../maquinarias')
+
+
+    #Funciones para Pestaña de Clientes
+def clientes(request):
+    clientes = Clientes.objects.all()
+    return render(request, 'clientes.html', {"clientes": clientes})
+
+def clientes_editar(request,id):
+    clientes = Clientes.objects.get(id=id)
+    return render(request, 'clientes-editar.html', {"clientes": clientes})
+
+def clientes_editados(request,id):
+    id = request.POST['id']
+    empresa = request.POST['empresa']
+    condicion_iva = request.POST['iva']
+    cuit = request.POST['cuit']
+    domicilio = request.POST['domicilio']
+    telefono = request.POST['telefono']
+    mail = request.POST['mail']
+    clientes = Clientes.objects.get(id=id)
+    clientes.empresa = empresa
+    clientes.condicion_iva = condicion_iva
+    clientes.cuit = cuit
+    clientes.domicilio = domicilio
+    clientes.telefono = telefono
+    clientes.mail = mail
+    clientes.save()
+    return redirect('../listado')
+
+def create(request):
+    empresa = request.POST['empresa']
+    condicion_iva = request.POST['iva']
+    domicilio = request.POST['domicilio']
+    telefono = request.POST['telefono']
+    mail = request.POST['mail']
+    cuit = request.POST['cuit']
+    clientes = Clientes.objects.create(
+        empresa = empresa,
+        condicion_iva = condicion_iva,
+        cuit = cuit,
+        domicilio = domicilio,
+        telefono = telefono,
+        mail = mail,
+    )
+    return redirect('../listado')
+
+def eliminar(request,id):
+    cliente = Clientes.objects.get(id=id)
+    cliente.delete()
+    return redirect('../listado')
+#FIN Funciones para Pestaña de Clientes
