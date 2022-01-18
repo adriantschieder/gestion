@@ -1,0 +1,21 @@
+{% extends "./base.html" %}
+{% block head%}<title>Editar Maquinarias</title>{%endblock%}
+{% block body%}
+<div class="col-12">
+    <div class="col-md-4 offset-md-4">
+        <h1 class="mt-3 text-white">Editar Datos</h1>
+        <p class="warning text-white">Todos los campos son obligatorios</p>
+        <form action="../maquinaria_editada/{{maquinarias.id}}/{{maquinarias.propietario_id}}" class="form-group" method="POST">
+            {% csrf_token %}
+            <div class="row col-md-12">
+                <p class="text-white col-4 my-auto">Empresa: </p>
+                <input type="text" name="propietario" class="form-control mt-1 col-8" value="{{maquinarias.propietario}}" readonly >
+            </div>
+            <input type="text" name="tipo" class="form-control mt-1" value="{{maquinarias.tipo}}">
+            <input type="text" name="modelo" class="form-control mt-1" value="{{maquinarias.modelo}}">
+            <input type="text" name="marca" class="form-control mt-1" value="{{maquinarias.marca}}">
+            <button class="btn btn-success aling-center px-5 mt-3">Editar</button>
+        </form>
+    </div>
+</div>
+{%endblock%}

@@ -1,20 +1,16 @@
 {% extends "./base.html" %}
-{% block head%}<title>Maquinarias</title>{%endblock%}
+{% block head%}<title>Maquinarias de {{clientes}}</title>{%endblock%}
 {% block body%}
 <div class="col-12">
-    <h1 class="mt-3 text-white">Maquinarias</h1>
+    <h1 class="mt-3 text-white">Maquinarias de {{clientes}}</h1>
 </div>
 <div class="row m-3"> 
     <div class="col-3 p-3 text-white">
-        <h2>Asigne una nueva maquinaria</h2>
+        <h2>Asigne una nueva máquinaria</h2>
         <p class="warning">Todos los campos son obligatorios</p>
-        <form action="../agregar_maquinarias/" class="form-group" method="POST">
+        <form action="../agregar_maquinarias_cliente/{{clientes.id}}" class="form-group" method="POST">
             {% csrf_token %}
-            <select class="form-control mb-3" aria-label=".form-select-sm example" name="propietario" id="propietario">
-                {% for clientes in clientes %}
-                    <option value="{{clientes.id}}">{{clientes.empresa}}</option>
-                {%endfor%}
-            </select>
+            <input type="hidden" name="propietario" class="form-control mt-1" value="{{clientes.id}}">
             <input type="text" name="tipo" class="form-control mt-1" placeholder="Tipo de Maquinaria:">
             <input type="text" name="modelo" class="form-control mt-1" placeholder="Modelo Maquinaria:">
             <input type="text" name="marca" class="form-control mt-1" placeholder="Marca:">
@@ -35,20 +31,19 @@
             </thead>
             <tbody class="">
                 {% for maquinarias in maquinarias %}
-                <tr>
-                    <td> {{ maquinarias.propietario}} </td>
-                    <td> {{ maquinarias.tipo}} </td>
-                    <td> {{ maquinarias.modelo}} </td>
-                    <td> {{ maquinarias.marca}} </td>
-                    <td><a href="../editar_maquinarias/{{maquinarias.id}}" class="btn btn-success" title="Editar"><i class="fas fa-pen"></i></a></td>
-                    <td><a href="../eliminar_maquinaria/{{maquinarias.id}}" class="btn btn-danger" title="Eliminar"><i class="far fa-trash-alt"></i></a></td>
-                    <td><a href="../arreglos-cliente/{{maquinarias.id}}" class="btn btn-primary" title="Arreglos"><i class="fas fa-toolbox"></i></a></td>
-                    
-                </tr>
+                    <tr>
+                        <td> {{ maquinarias.propietario}} </td>
+                        <td> {{ maquinarias.tipo}} </td>
+                        <td> {{ maquinarias.modelo}} </td>
+                        <td> {{ maquinarias.marca}} </td>
+                        <td><a href="../editar_maquinarias_cliente/{{maquinarias.id}}/" class="btn btn-success" title="Editar"><i class="fas fa-pen"></i></a></td>
+                        <td><a href="../eliminar_maquinaria/{{maquinarias.id}}/{{clientes.id}}/" class="btn btn-danger" title="Eliminar"><i class="far fa-trash-alt"></i></a></td>
+                        <td><a href="../arreglos-cliente/{{maquinarias.id}}" class="btn btn-primary" title="Arreglos"><i class="fas fa-toolbox"></i></a></td>
+                        
+                    </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
-               
 </div>
 {%endblock%}
