@@ -138,7 +138,7 @@ def editar_maquinarias_cliente(request,id):
 def eliminar_maquinaria(request,id,idpropietario):
     maquinarias = Maquinarias.objects.get(id=id)
     maquinarias.delete()
-    return redirect(f'/clientes/maquinarias')
+    return redirect(f'/clientes/maquinarias-cliente/{idpropietario}')
 
     
     #Funciones para Pestaña de Clientes
