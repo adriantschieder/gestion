@@ -29,7 +29,7 @@ class Arreglo_Maquinarias(models.Model):
     """ arreglos propios de una maquinaria(propietario, fecha del arreglo y el arreglo en si)
     """
     maquinaria = models.ForeignKey(Maquinarias, null= True, blank = True, on_delete=models.CASCADE)
-    fecha_arreglo = models.DateField(auto_now=True)
+    fecha_arreglo = models.DateField()
     arreglo = models.CharField(max_length=200)
 
     def __str__(self) -> str:
