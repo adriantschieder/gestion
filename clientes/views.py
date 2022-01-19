@@ -137,14 +137,12 @@ def editar_maquinarias_cliente(request,id):
     maquinarias = Maquinarias.objects.get(id=id)
     return render(request, 'editar_maquinarias_cliente.html', {"maquinarias": maquinarias})
 
-def eliminar_maquinaria(request,id,idpropietario):
+def eliminar_maquinaria(request,id,):
     maquinarias = Maquinarias.objects.get(id=id)
     maquinarias.delete()
-<<<<<<< HEAD
-    return redirect(f'/clientes/maquinarias-cliente/{idpropietario}')
-=======
-    return redirect(f'/clientes/maquinarias-cliente/{idpropietario}')
+    return redirect(f'/clientes/maquinarias')
 
+    
     #Funciones para Pestaña de Clientes
 def clientes(request):
     abuscar = request.GET.get("clientebuscado")
@@ -192,4 +190,4 @@ def eliminar(request,id):
     cliente.delete()
     return redirect('../listado')    
 #FIN Funciones para Pestaña de Clientes
->>>>>>> 92ed95c095826cfd3fcd46f5454fe69055693569
+
