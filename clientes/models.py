@@ -1,5 +1,5 @@
 from django.db import models
-from datetime import date
+from datetime import datetime
 
 class Clientes(models.Model):
     """ datos de la empresa, condicion iva, telefono, domicilio, mail y cuit
@@ -29,9 +29,13 @@ class Arreglo_Maquinarias(models.Model):
     """ arreglos propios de una maquinaria(propietario, fecha del arreglo y el arreglo en si)
     """
     maquinaria = models.ForeignKey(Maquinarias, null= True, blank = True, on_delete=models.CASCADE)
-    fecha_arreglo = models.DateField()
+    fecha_arreglo = models.DateField(null=True)
     arreglo = models.CharField(max_length=200)
 
     def __str__(self) -> str:
         return f'{self.maquinaria} => Fecha: {self.fecha_arreglo}'
+    def mostrarfecha(self):
+        fecha = self.fecha_arreglo
+        fechaamostrar = fecha.strftime("%Y-%m-%d")
+        return fechaamostrar
 

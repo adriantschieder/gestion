@@ -57,7 +57,7 @@
         <tbody class="">
             <tr>
                 <td> {{ arreglos.maquinaria}} </td>
-                <td> {{ arreglos.fecha_arreglo}} </td>
+                <td> {{ arreglos.mostrarfecha }} </td>
                 <td> {{ arreglos.arreglo}} </td>
                 <td><a href="" data-toggle="modal" data-target="#eliminar{{arreglos.id}}" class="btn btn-danger" title="Eliminar"><i class="far fa-trash-alt"></i></a></td>
                 <td><a href="#arreglos{{arreglos.id}}" data-toggle="modal" data-target="#arreglos{{arreglos.id}}" class="btn btn-success" title="Arreglos"><i class="fas fa-eye"></i></a></td>
@@ -86,7 +86,7 @@
           </div>
           <div class="form-group row justify-content-center">
             <label>Fecha: <i>(formato válido YYYY-MM-DD) &nbsp</i></label>
-            <input type="text" name="fecha_arreglo" class="form-control mt-1 col-4" value="{{arreglos.fecha_arreglo}}">
+            <input type="text" name="fecha_arreglo" class="form-control mt-1 col-4" value="{{arreglos.mostrarfecha}}">
           </div>
           <div class="form-group">
             <label>Detalles: </label>

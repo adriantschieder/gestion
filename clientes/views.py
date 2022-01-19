@@ -1,4 +1,5 @@
 # from pickle import GET
+from asyncio.windows_events import NULL
 from django.db.models import Q
 # import pkgutil
 # from urllib import request
@@ -6,7 +7,7 @@ from django.shortcuts import redirect, render
 from clientes.models import Clientes, Maquinarias, Arreglo_Maquinarias
 from django.views.generic.edit import DeleteView, UpdateView
 from django.urls import reverse_lazy
-
+from datetime import datetime
 #Funciones para Pestaña de Arreglos
 def arreglos(request):
     arreglos = Arreglo_Maquinarias.objects.all()
@@ -32,6 +33,10 @@ def arreglos_agregados(request):
 def agregar_arreglos_clientes(request,id):
     maquinaria = Maquinarias.objects.get(pk = request.POST['maquinaria'])
     fecha_arreglo = request.POST['fecha_arreglo']
+    if fecha_arreglo =="":
+        fecha_arreglo = datetime.now()
+    else:
+        fecha_arreglo = fecha_arreglo
     arreglo1 = request.POST['arreglo']
     arreglo = Arreglo_Maquinarias.objects.create(
         maquinaria = maquinaria,
