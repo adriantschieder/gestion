@@ -22,5 +22,5 @@ la maquinaria en la cual se va a efectuar el arreglo. Para ello, puede ir desde 
 La app blog es para el proyecto final.
 ## Trabajan en este proyecto 🛠️
 * Adrian Tschieder - Trabajo Inicial y Arreglos - adriantschieder
-* Andres Scheffer - Maquinarias - adrielscheffer
-* Bautista - Clientes - 
+* Andriel Scheffer - Maquinarias - adrielscheffer
+
