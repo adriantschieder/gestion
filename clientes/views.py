@@ -13,16 +13,17 @@ from django.views.generic.edit import DeleteView, UpdateView
 from django.urls import reverse_lazy
 from datetime import datetime
 #Funciones para Pestaña de Arreglos
+@login_required
 def arreglos(request):
     arreglos = Arreglo_Maquinarias.objects.all()
     maquinarias = Maquinarias.objects.all()
     return render(request, 'arreglos.html', {"arreglos": arreglos, "maquinarias": maquinarias})
-
+@login_required
 def arreglos_cliente(request,id):
     maquinarias = Maquinarias.objects.get(id=id)
     arreglos = Arreglo_Maquinarias.objects.filter(maquinaria=id)
     return render(request, 'arreglos-cliente.html', {"arreglos": arreglos, "maquinarias": maquinarias})
-
+@login_required
 def arreglos_agregados(request):
     maquinarias = Arreglo_Maquinarias.objects.get(pk = request.POST['maquinarias'])
     fecha_arreglo = request.POST['fecha_arreglo']
@@ -33,7 +34,7 @@ def arreglos_agregados(request):
         arreglo = arreglo1,
     )
     return redirect('../arreglos')
-
+@login_required
 def agregar_arreglos_clientes(request,id):
     maquinaria = Maquinarias.objects.get(pk = request.POST['maquinaria'])
     fecha_arreglo = request.POST['fecha_arreglo']
@@ -48,17 +49,17 @@ def agregar_arreglos_clientes(request,id):
         arreglo = arreglo1,
     )
     return redirect(f'/clientes/arreglos-cliente/{id}')
-
+@login_required
 def eliminar_arreglo(request,id, idmaquina):
     arreglo = Arreglo_Maquinarias.objects.get(id=id)
     arreglo.delete()
     return redirect(f'/clientes/arreglos-cliente/{idmaquina}')
-
+@login_required
 def editar_arreglos_cliente(request,id,idmaquina):
     maquinarias = Maquinarias.objects.get(id=idmaquina)
     arreglos = Arreglo_Maquinarias.objects.get(id=id)
     return render(request, 'ver-arreglos.html', {"arreglos": arreglos, "maquinarias": maquinarias})
-
+@login_required
 def arreglos_editados(request,id,idmaquina):
     maquinaria = Maquinarias.objects.get(pk = request.POST['maquinaria'])
     fecha_arreglo = request.POST['fecha_arreglo']
@@ -73,12 +74,12 @@ def arreglos_editados(request,id,idmaquina):
 #FIN Funciones para Pestaña de Arreglos
 
 # funciones para pestaña de maquinarias
-
+@login_required
 def maquinarias(request):
     clientes = Clientes.objects.all()
     maquinarias = Maquinarias.objects.all()
     return render(request, 'maquinarias.html', {"maquinarias": maquinarias,"clientes": clientes})
-
+@login_required
 def agregar_maquinas(request):
     propietario = Clientes.objects.get(pk = request.POST["propietario"])
     tipo = request.POST['tipo']
@@ -91,7 +92,7 @@ def agregar_maquinas(request):
         marca = marca,
     )
     return redirect('../maquinarias')
-
+@login_required
 def agregar_maquinas_clientes(request,id):
     propietario = Clientes.objects.get(pk = request.POST['propietario']) #el problema era que obtenia un string y no lo tomaba como una instancia
     tipo = request.POST['tipo']
@@ -104,18 +105,18 @@ def agregar_maquinas_clientes(request,id):
         marca = marca,
     )
     return redirect(f'../maquinarias-cliente/{id}')
-
+@login_required
 def maquinarias_cliente(request,id):
     clientes = Clientes.objects.get(id=id)
     maquinarias = Maquinarias.objects.filter(propietario_id=id)
     return render(request, 'maquinarias-cliente.html', {"maquinarias": maquinarias,"clientes": clientes})
-
+@login_required
 def editar_maquinarias(request,id):
     maquinarias = Maquinarias.objects.get(id=id)
     return render (request, "editar_maquinarias.html", {"maquinarias": maquinarias})
 
 
-
+@login_required
 def maquinaria_editada(request,idmaquina,idpropietario):
     propietario1 = request.POST['propietario']
     tipo = request.POST['tipo']
@@ -127,7 +128,7 @@ def maquinaria_editada(request,idmaquina,idpropietario):
     maquinarias.marca = marca
     maquinarias.save()
     return redirect(f'/clientes/maquinarias-cliente/{idpropietario}')
-
+@login_required
 def maquinaria_editada2(request,idmaquina):
     propietario = request.POST['propietario']
     tipo = request.POST['tipo']
@@ -139,11 +140,11 @@ def maquinaria_editada2(request,idmaquina):
     maquinarias.marca = marca
     maquinarias.save()
     return redirect(f'/clientes/maquinarias/')
-
+@login_required
 def editar_maquinarias_cliente(request,id):
     maquinarias = Maquinarias.objects.get(id=id)
     return render(request, 'editar_maquinarias_cliente.html', {"maquinarias": maquinarias})
-
+@login_required
 def eliminar_maquinaria(request,id,idpropietario):
     maquinarias = Maquinarias.objects.get(id=id)
     maquinarias.delete()
@@ -151,6 +152,7 @@ def eliminar_maquinaria(request,id,idpropietario):
 
     
     #Funciones para Pestaña de Clientes
+@login_required
 def clientes(request):
     abuscar = request.GET.get("clientebuscado")
     cliente = Clientes.objects.all()
@@ -163,7 +165,7 @@ def clientes(request):
         ).distinct()
 
     return render(request, 'clientes.html', {"clientes":cliente})
-
+@login_required
 def create(request):
     empresa = request.POST['empresa']
     condicion_iva = request.POST['iva']
@@ -191,7 +193,7 @@ class Client_delete(LoginRequiredMixin,DeleteView):
     template_name = "clientes_confirm_delete.html"
      
 #FIN Funciones para Pestaña de Clientes
-
+@login_required
 def eliminar(request,id):
     cliente = Clientes.objects.get(id=id)
     cliente.delete()
