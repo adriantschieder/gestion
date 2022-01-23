@@ -1,0 +1,27 @@
+{% extends 'baseauth.html' %}
+{% block title %} Cerrar Sesión {% endblock %}
+{% block contenidologin %}
+        <div id="layoutAuthentication">
+            <div id="layoutAuthentication_content">
+                <main>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-5">
+                                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
+                                    <div class="card-body">
+                                        <h2>Gracias! Ya te has deslogueado</h2>
+
+                                        <div class="small"><a href="{% url 'login' %}">Volver a Iniciar Sesión!</a></div>
+                                        
+                                    </div>
+                                    <div class="card-footer text-center py-3">
+                                        <div class="small"><a href="{% url 'register' %}">Registrate!</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+{% endblock %}

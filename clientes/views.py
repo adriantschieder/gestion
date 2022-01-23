@@ -1,6 +1,10 @@
-# from pickle import GET
-
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import login,logout, authenticate
 from django.db.models import Q
+from clientes.forms import registro
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+
 # import pkgutil
 # from urllib import request
 from django.shortcuts import redirect, render
@@ -176,12 +180,12 @@ def create(request):
         mail = mail,
     )
     return redirect('../listado')
-class Client_edit(UpdateView):
+class Client_edit(LoginRequiredMixin,UpdateView):
     model = Clientes
     success_url = "/clientes/listado/"
     fields = ['id','empresa','domicilio','condicion_iva','cuit','telefono','mail']
     template_name="clientes_form.html"
-class Client_delete(DeleteView):
+class Client_delete(LoginRequiredMixin,DeleteView):
     model = Clientes
     success_url = "/clientes/listado/"
     template_name = "clientes_confirm_delete.html"
@@ -193,3 +197,37 @@ def eliminar(request,id):
     cliente.delete()
     return redirect('../listado')    
 #FIN Funciones para Pestaña de Clientes
+#LOGIN
+def login_request(request):
+    if request.method=='POST':
+        form = AuthenticationForm(request,data = request.POST)
+
+        if form.is_valid():
+            usuario = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            user=authenticate(username=usuario, password=password)
+            if user is not None:
+                login(request,user)
+                return render(request, 'index.html', {"mensaje": f'Bienvenido {usuario}'})
+            else:
+                return render(request, 'login.html', {"mensaje": f'Intentalo nuevamente'})
+        else:
+            return render(request, 'login.html', {"mensaje": f'Algunos de los datos son incorrectos'})
+    else:
+        form = AuthenticationForm()
+        return render(request, "login.html", {'form':form})
+
+#register
+def register(request):
+    if request.method=='POST':
+        form = UserCreationForm(request,data = request.POST)
+        # form = registro(request,data = request.POST)
+        if form.is_valid():
+            usuario = form.cleaned_data['username']
+            form.save()
+            return render(request, 'index.html', {"mensaje": f'Bienvenido {usuario}'})
+    else:
+        form = UserCreationForm()
+        # form = registro()
+    return render(request, "register.html", {'form':form})

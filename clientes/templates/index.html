@@ -2,6 +2,7 @@
 {% block head%}<title>Maquinarias de {{clientes}}</title>{%endblock%}
 {% block body%}
 <div class="col-12 ">
+    <p class="text-white mt-3">{{mensaje}}</p>
     <div class="row col-md-4 mx-auto">
         <a href="{% url 'clientes'%}" class="text-white cajas_index"><i class="fas fa-users fa-4x"></i><br>Clientes</a>
         <a href="{% url 'maquinarias'%}" class="text-white cajas_index" ><i class="fas fa-tractor fa-4x"></i><br>Maquinarias</a>

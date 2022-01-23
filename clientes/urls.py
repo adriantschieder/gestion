@@ -1,14 +1,17 @@
 from django.urls import path
 from .views import (
      #funciones de Clientes
-     Client_delete, Client_edit, clientes,create,
+     Client_delete, Client_edit, clientes,create, 
      #funciones de Maquinarias
      maquinarias,agregar_maquinas,editar_maquinarias,maquinaria_editada2,maquinarias_cliente,eliminar_maquinaria,maquinaria_editada,
      editar_maquinarias_cliente,agregar_maquinas_clientes,
 
      #funciones de Arreglos
      arreglos,arreglos_cliente,agregar_arreglos_clientes,arreglos_editados,eliminar_arreglo,
+     #login
+     login_request, register,
      )
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
      path('arreglos/',arreglos, name ='arreglos'),
@@ -34,4 +37,8 @@ urlpatterns = [
      path('add/', create),
      path('client-edit/<pk>/', Client_edit.as_view(), name="edit"), 
      path('client-delete/<pk>/', Client_delete.as_view(), name="delete"),
+     #-------------------------------------------------------------
+     path('login/', login_request, name = "login"),
+     path('register/', register, name = "register"),
+     path('logout/', LogoutView.as_view(template_name='logout.html'), name = "logout")
 ]
