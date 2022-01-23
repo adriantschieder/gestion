@@ -6,12 +6,14 @@ from django.contrib.auth.models import User
 
 
 class registro(UserCreationForm):
+    first_name = forms.CharField(max_length=50,label="Nombre")
+    last_name = forms.CharField(max_length=50,label="Apellido")
     email=forms.EmailField()
     password1 = forms.CharField(label="Contraseña", widget=forms.PasswordInput)
     password2 = forms.CharField(label="Repetir Contraseña", widget=forms.PasswordInput)
 
     class Meta:
         model = User
-        fields = ['username','email','password1','password2']
+        fields = ['username','first_name', 'last_name','email','password1','password2']
         
         help_texts = {k:"" for k in fields}

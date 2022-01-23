@@ -223,13 +223,13 @@ def login_request(request):
 #register
 def register(request):
     if request.method=='POST':
-        form = UserCreationForm(request,data = request.POST)
-        # form = registro(request,data = request.POST)
+        # form = UserCreationForm(request.POST)
+        form = registro(request.POST)
         if form.is_valid():
             usuario = form.cleaned_data['username']
             form.save()
             return render(request, 'index.html', {"mensaje": f'Bienvenido {usuario}'})
     else:
-        form = UserCreationForm()
-        # form = registro()
+        # form = UserCreationForm()
+        form = registro()
     return render(request, "register.html", {'form':form})
