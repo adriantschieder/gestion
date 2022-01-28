@@ -32,9 +32,17 @@
           <li class="nav-item">
             <a class="nav-link text-white" href="{% url 'arreglos' %}">Arreglos</a>
           </li>
+
         </ul>
     </div>
-
+    
+    {% for auth in backends.associated %}
+  
+              {% if auth.provider == 'facebook' %}
+                  <img src="{{ auth.extra_data.picture.data.url }}" class="rounded-circle mr-3" alt="" width="40" height="40">
+              {% endif %}
+          
+          {% endfor %}
     <!-- Example single danger button -->
 <div class="btn-group">
   <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

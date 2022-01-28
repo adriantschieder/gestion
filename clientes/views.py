@@ -211,7 +211,7 @@ def login_request(request):
             user=authenticate(username=usuario, password=password)
             if user is not None:
                 login(request,user)
-                return render(request, 'index.html', {"mensaje": f'Bienvenido {usuario}'})
+                return render(request, 'index-admin.html', {"mensaje": f'Bienvenido {usuario}'})
             else:
                 return render(request, 'login.html', {"mensaje": f'Intentalo nuevamente'})
         else:
@@ -228,7 +228,7 @@ def register(request):
         if form.is_valid():
             usuario = form.cleaned_data['username']
             form.save()
-            return render(request, 'index.html', {"mensaje": f'Bienvenido {usuario}'})
+            return render(request, 'index-admin.html', {"mensaje": f'Bienvenido {usuario}'})
     else:
         # form = UserCreationForm()
         form = registro()
