@@ -1,7 +1,7 @@
 
 from re import template
 from .models import Post
-
+from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView
 
 
@@ -21,4 +21,7 @@ class nuevo_blog(CreateView):
     template_name = "crear_post.html"
     fields = "__all__"
 
-
+def about(request):
+    return render(request, 'about.html')
+def contact(request):
+    return render(request, 'contact.html')

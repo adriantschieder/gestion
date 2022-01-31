@@ -1,29 +1,102 @@
 {% extends './baseauth.html' %}
 {% block title %}Crear Cuenta{% endblock %}
 {% block contenidologin %}
-        <div id="layoutAuthentication">
-            <div id="layoutAuthentication_content">
-                <main>
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-7">
-                                <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Account</h3></div>
-                                    <div class="card-body">
-                                        <form method="POST">
-                                            {% csrf_token %}
-                                            {{form.as_p}}
-                                            <button class="btn btn-success" type="submit">Registrarse</button>
-                            
-                                        </form>
-                                    </div>
-                                    <div class="card-footer text-center py-3">
-                                        <div class="small"><a href="{% url 'login' %}">Ya tienes Cuenta? Inicia Sesión</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </main>
+<body class="hold-transition register-page">
+    <div class="register-box">
+      <div class="card card-outline card-primary">
+        <div class="card-header text-center">
+          <h1 class="h1"><b>Registro</b></h1>
+        </div>
+        <div class="card-body">
+          <p class="login-box-msg">Regístrese</p>
+          
+    
+          <form action="{% url 'register' %}" method="POST">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Escribe un Usuario" name="{{form.username.html_name}}">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-user"></span>
+                </div>
+              </div>
             </div>
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Nombre" name="{{form.first_name.html_name}}">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-user"></span>
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Apellido" name="{{form.last_name.html_name}}">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-user"></span>
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <input type="email" class="form-control" placeholder="Email" name="{{form.email.html_name}}">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-envelope"></span>
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <input type="password" class="form-control" placeholder="Contraseña" name="{{form.password1.html_name}}">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-lock"></span>
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <input type="password" class="form-control" placeholder="Reescriba su Contraseña" name="{{form.password2.html_name}}">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-lock"></span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-8">
+                <div class="icheck-primary">
+                  <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+                  <label for="agreeTerms">
+                    Acepto los <a href="#">terminos</a>
+                  </label>
+                </div>
+              </div>
+              <!-- /.col -->
+              <div class="col-4">
+                <button type="submit" class="btn btn-primary btn-block">Registro</button>
+              </div>
+              <!-- /.col -->
+            </div>
+
+          </form>
+    
+          <div class="social-auth-links text-center">
+            <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-block btn-primary">
+              <i class="fab fa-facebook mr-2"></i>
+              Registrarse con Facebook
+            </a>
+            <a href="#" class="btn btn-block btn-danger">
+              <i class="fab fa-google-plus mr-2"></i>
+              Registrarse con Google+
+            </a>
+          </div>
+    
+          <a href="{% url 'login' %}" class="text-center">Ya soy miembro</a>
+          <p class="mb-0">
+            <a href="{% url 'index' %}" class="text-center">ir a la Página Principal</a>
+          </p>
+        </div>
+        <!-- /.form-box -->
+      </div><!-- /.card -->
+    </div>
+    <!-- /.register-box -->
 {% endblock %}
