@@ -1,0 +1,113 @@
+{% extends 'base-perfil.html' %}
+{% block head %}
+<title>Perfil de Usuario</title>
+{% endblock head %}
+{% block body %}
+<div class="container">
+    <div class="row gutters-sm mt-3">
+      <div class="col-md-4 d-none d-md-block">
+        <div class="card ">
+          <div class="card-body">
+            <nav class="nav flex-column nav-pills nav-gap-y-1">
+              <img src="{{ perfil.avatar.url }}" class="rounded-circle my-3 mx-auto" alt="" width="150" height="150">
+              <a href="#profile" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded active">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user mr-2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>Perfil
+              </a>
+              <a href="#account" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings mr-2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>Cuenta
+              </a>
+              <a href="#security" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shield mr-2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>Seguridad
+              </a>
+            </nav>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header border-bottom mb-3 d-flex d-md-none">
+            <ul class="nav nav-tabs card-header-tabs nav-gap-x-1" role="tablist"> 
+              <li class="nav-item">
+                <a href="#profile" data-toggle="tab" class="nav-link has-icon active"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></a>
+              </li>
+              <li class="nav-item">
+                <a href="#account" data-toggle="tab" class="nav-link has-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></a>
+              </li>
+              <li class="nav-item">
+                <a href="#security" data-toggle="tab" class="nav-link has-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shield"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></a>
+              </li>
+            </ul>
+          </div>
+          <div class="card-body tab-content">
+            <div class="tab-pane active" id="profile">
+              <h6>TU PERFIL</h6>
+              <hr>
+              <form>
+                <div class="form-group">
+                  <label for="fullName">Nombre:</label>
+                  <input type="text" class="form-control" id="first_name" name="first_name" aria-describedby="fullNameHelp" placeholder="Ingrese su nombre" value="{{user.first_name}}">
+                  <small id="fullNameHelp" class="form-text text-muted">Este es el nombre que aparece en la app.</small>
+                </div>
+                <div class="form-group">
+                  <label for="fullName">Apellido:</label>
+                  <input type="text" class="form-control" id="last_name" name="last_name" aria-describedby="fullNameHelp" placeholder="Ingrese su apellido" value="{{user.last_name}}">
+                </div>
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="text" class="form-control" id="email" name="email" placeholder="su email" value="{{user.email}}">
+                </div>
+                <div class="form-group">
+                  <label for="location">Dirección:</label>
+                  <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese su domicilio" value="{{perfil.direccion}}">
+                </div>
+                <div class="form-group">
+                  <label for="location">Ciudad:</label>
+                  <input type="text" class="form-control" id="ciudad" name="ciudad" placeholder="Ciudad" value="{{perfil.ciudad}}">
+                </div>
+                <div class="form-group">
+                  <label for="location">Provincia:</label>
+                  <input type="text" class="form-control" id="provincia" name="provincia" placeholder="Provincia" value="{{perfil.provincia}}">
+                </div>
+                <button type="submit" class="btn btn-primary">Actualizar Perfil</button>
+              </form>
+            </div>
+            <div class="tab-pane" id="account">
+              <h6>USUARIOS</h6>
+              <hr>
+              <form>
+                <div class="form-group">
+                  <label for="username">Usuario</label>
+                  <input type="text" class="form-control" id="username" name="username" aria-describedby="usernameHelp" placeholder="Ingrese su username" value="{{user.username}}">
+                  <small id="usernameHelp" class="form-text text-muted">After changing your username, your old username becomes available for anyone else to claim.</small>
+                </div>
+                <hr>
+                <div class="form-group">
+                  <label class="d-block text-danger">Borrar Cuenta</label>
+                  <p class="text-muted font-size-sm">Si borra su cuenta, ya no podrá acceder a ningun área.</p>
+                </div>
+                <button class="btn btn-danger" type="button">Borrar Cuenta</button>
+              </form>
+            </div>
+            <div class="tab-pane" id="security">
+              <h6>OPCIONES DE SEGURIDAD</h6>
+              <hr>
+              <form>
+                <div class="form-group">
+                  <label class="d-block">Cambiar contraseña</label>
+                  <input type="text" class="form-control" placeholder="Ingrese su contraseña actual">
+                  <input type="text" class="form-control mt-1" placeholder="Ingrese su nueva contraseña">
+                  <input type="text" class="form-control mt-1" placeholder="Confirme su nueva contraseña">
+                </div>
+              </form>
+              <hr>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+<script type="text/javascript">
+
+</script>
+{% endblock body %}

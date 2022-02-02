@@ -12,6 +12,8 @@ from clientes.models import Clientes, Maquinarias, Arreglo_Maquinarias
 from django.views.generic.edit import DeleteView, UpdateView
 from django.urls import reverse_lazy
 from datetime import datetime
+
+from perfiles.models import Perfil_Usuario
 #Funciones para Pestaña de Arreglos
 @login_required
 def arreglos(request):
@@ -211,7 +213,8 @@ def login_request(request):
             user=authenticate(username=usuario, password=password)
             if user is not None:
                 login(request,user)
-                return render(request, 'index-admin.html', {"mensaje": f'Bienvenido {usuario}'})
+                avatar=Perfil_Usuario.objects.filter(usuario_id=request.user.id)
+                return render(request, 'index-admin.html', {"mensaje": f'Bienvenido {usuario}',"avatar":avatar[0].avatar.url})
             else:
                 return render(request, 'login.html', {"mensaje": f'Intentalo nuevamente'})
         else:
