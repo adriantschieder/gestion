@@ -36,7 +36,8 @@
         </ul>
     </div>
     {% if request.user.is_authenticated %}
-                  <img src="{{ avatar }}" class="rounded-circle mr-3" alt="" width="40" height="40">
+                  <p class="text-white mt-3">{{mensajebienvenida}}</p>
+                  <img src="{{ avatar1 }}" class="rounded-circle mr-3" alt="" width="40" height="40">
     {% else %}
         {% for auth in backends.associated %}
       
@@ -53,6 +54,8 @@
   </button>
   <div class="dropdown-menu dropdown-menu-right">
     <a class="dropdown-item" href="{% url 'perfil' user.id %}">Ver Perfil</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="{% url 'list-user' %}">Usuarios</a>
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="{% url 'logout' %}">Salir</a>
   </div>
