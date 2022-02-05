@@ -214,7 +214,7 @@ def login_request(request):
             if user is not None:
                 login(request,user)
                 avatar=Perfil_Usuario.objects.filter(usuario_id=request.user.id)
-                return render(request, 'index-admin.html', {"mensaje": f'Bienvenido {usuario}',"avatar":avatar[0].avatar.url})
+                return render(request, 'index-admin.html', {"mensajebienvenida": f'Bienvenido {usuario}',"avatar":avatar[0].avatar.url})
             else:
                 return render(request, 'login.html', {"mensaje": f'Intentalo nuevamente'})
         else:
