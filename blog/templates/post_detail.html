@@ -7,8 +7,15 @@
 {% block content %}
 
 <h1>{{post.titulo}}</h1>
-<small> by: {{post.autor}}</small><br>
-<a> {{post.cuerpo}}</a><br>
+
+<small> by: {{post.autor}}<br>
+        fecha: {{post.fecha_publicacion}}
+
+
+
+</small><br>
+
+<a> {{post.cuerpo|safe}}</a><br>
 <a href="{% url 'home' %}" class="btn btn-primary"> Atras</a>
 {% endblock %}
 

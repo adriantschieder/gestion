@@ -1,10 +1,10 @@
 from pyexpat import model
 from tkinter import CASCADE
 from django.db import models
-from datetime import datetime
 from django.urls import reverse
 from django.contrib.auth.models import User
-
+from ckeditor.fields import RichTextField
+from datetime import datetime, date
 
 
 # Create your models here.
@@ -13,7 +13,8 @@ from django.contrib.auth.models import User
 class Post(models.Model):
     titulo = models.CharField(max_length=255, null=True)
     autor = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    cuerpo = models.TextField()
+    cuerpo = RichTextField(blank=True,null=True)
+    fecha_publicacion= models.DateField(auto_now_add=True)
 
 
     def __str__(self):

@@ -9,7 +9,7 @@
     <link rel="icon" href="{% static 'assets/img/favicons/favicon.ico' %}">
     
 
-    <title>{% block title %}{% endblock title %}</title>
+    <title>{% block title %}Blog{% endblock title %}</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/pricing/">
 
@@ -18,6 +18,7 @@
 
     <!-- Custom styles for this template -->
     <link href="pricing.css" rel="stylesheet">
+
   </head>
 
   <body>
@@ -25,7 +26,7 @@
         <img src="{% static 'assets/img/logotractor.png' %}" alt="Agrop">&nbsp&nbsp
           <h3 class="my-0 mr-md-auto font-weight-normal">Agrop</h3>
         <nav class="my-2 my-md-0 mr-md-3">
-          <a class="p-2 text-dark" href="{% url 'agregar_post' %}">Agregar post</a>
+          <a class="p-2 text-dark" href="{% url 'home' %}">Blog</a>
           <a class="p-2 text-dark" href="{% url 'index' %}">Inicio</a>
           <a class="p-2 text-dark" href="{% url 'about' %}">Quienes Somos</a>
           <a class="p-2 text-dark" href="{% url 'contact' %}">Contacto</a>
@@ -83,7 +84,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="{% static 'assets/js/vendor/jquery-slim.min.js' %}"><\/script>')</script>
+    <script window.jQuery || document.write(<script src ="{% static 'assets/js/vendor/jquery-slim.min.js'%}")></script>
     <script src="{% static 'assets/js/vendor/popper.min.js' %}"></script>
     <script src="{% static 'dist/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'assets/js/vendor/holder.min.js' %}"></script>

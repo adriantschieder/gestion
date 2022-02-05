@@ -15,12 +15,17 @@ Crear blog
     <title>Document</title>
 </head>
 <body>
-    <form action="../../blog/agregar_post/"  method="POST"> {% csrf_token %}
-        {{ form.as_p }}
-        
-        <input type="submit" value= "enviar">
+
+    <div class="form-group">
+        <form action="../../blog/agregar_post/"  method="POST"> 
+            {% csrf_token %}
+            {{form.media}}
+            {{ form.as_p }}
+            
+            <input type="submit" value= "enviar">
 
     </form>
+    </div>
 </body>
 </html>
 
