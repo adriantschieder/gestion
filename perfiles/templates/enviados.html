@@ -1,0 +1,118 @@
+{% extends 'base-perfil.html' %}
+{% block head %}
+<title>Enviados</title>
+{% endblock head %}
+{% block body %}
+<!-- Main content -->
+<section class="content m-3">
+    <div class="row">
+      <div class="col-md-3">
+        <a href="{% url 'redactar' %}" class="btn btn-primary btn-block mb-3">Redactar</a>
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Bandejas</h3>
+          </div>
+          <div class="card-body p-0">
+            <ul class="nav nav-pills flex-column">
+              <li class="nav-item active">
+                <a href="{% url 'bandeja' %}" class="nav-link">
+                  <i class="fas fa-inbox"></i> Bandeja de Entrada
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-envelope"></i> Enviados
+                </a>
+              </li>
+            </ul>
+          </div>
+          <!-- /.card-body -->
+        </div>
+      </div>
+      <!-- /.col -->
+      <div class="col-md-9">
+        <div class="card card-primary card-outline">
+          <div class="card-header">
+            <h3 class="card-title">Enviados</h3>
+
+            <div class="card-tools">
+              <div class="input-group input-group-sm">
+                <input type="text" class="form-control" placeholder="Buscar...">
+                <div class="input-group-append">
+                  <div class="btn btn-primary">
+                    <i class="fas fa-search"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.card-tools -->
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body p-0">
+            <div class="mailbox-controls">
+              <!-- Check all button -->
+              <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="far fa-square"></i>
+              </button>
+              <div class="btn-group">
+                <button type="button" class="btn btn-default btn-sm">
+                  <i class="far fa-trash-alt"></i>
+                </button>
+              </div>
+              <!-- /.btn-group -->
+              <button type="button" class="btn btn-default btn-sm">
+                <i class="fas fa-sync-alt"></i>
+              </button>
+            </div>
+            <div class="table-responsive mailbox-messages">
+              <table class="table table-hover table-striped">
+                <tbody>
+                {% for enviado in enviado %}
+                <tr>
+                  <td>
+                    <div class="icheck-primary">
+                      <input type="checkbox" value="" id="{{enviado.id}}">
+                      <label for="check1"></label>
+                    </div>
+                  </td>
+                  {% for user in  user %} 
+                    {% if  enviado.destinatario_id == user.id%}
+                        <td class="mailbox-name"><a href="{% url 'leerenviados' enviado.id %}">{{user.last_name}}, {{user.first_name}}</a></td>
+                    {% endif %}
+                  {% endfor %}
+                  <td class="mailbox-subject"><b>{{enviado.asunto}}</b></td>
+                  <td class="mailbox-attachment"></td>
+                  <td class="mailbox-date">{{enviado.fecha}}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+              <!-- /.table -->
+            </div>
+            <!-- /.mail-box-messages -->
+          </div>
+          <!-- /.card-body -->
+          <div class="card-footer p-0">
+            <div class="mailbox-controls">
+              <!-- Check all button -->
+              <button type="button" class="btn btn-default btn-sm checkbox-toggle">
+                <i class="far fa-square"></i>
+              </button>
+              <div class="btn-group">
+                <button type="button" class="btn btn-default btn-sm">
+                  <i class="far fa-trash-alt"></i>
+                </button>
+              </div>
+              <!-- /.btn-group -->
+              <button type="button" class="btn btn-default btn-sm">
+                <i class="fas fa-sync-alt"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- /.card -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+{% endblock %}

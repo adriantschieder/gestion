@@ -1,0 +1,72 @@
+{% extends 'base-perfil.html' %}
+{% block head %}
+<title>Redactar Mensaje Nuevo</title> 
+{% endblock head %}
+{% block body %}
+<!-- Main content -->
+<section class="content mt-3">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-3">
+          <a href="{% url 'bandeja' %}" class="btn btn-primary btn-block mb-3">Volver a la Bandeja</a>
+
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Bandejas</h3>
+            </div>
+            <div class="card-body p-0">
+              <ul class="nav nav-pills flex-column">
+                <li class="nav-item active">
+                  <a href="{% url 'bandeja' %}" class="nav-link">
+                    <i class="fas fa-inbox"></i> Bandeja de Entrada
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'enviados' %}" class="nav-link">
+                    <i class="far fa-envelope"></i> Enviados
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <!-- /.card-body -->
+          </div>
+        </div>
+        <!-- /.col -->
+        <div class="col-md-9">
+          <div class="card card-primary card-outline">
+            <div class="card-header">
+              <h3 class="card-title">Leer Mail</h3>              
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body p-2">
+              <div class="mailbox-read-info">
+                <h5>Asunto: {{mensajealeer.asunto}}</h5>
+                {% for user in  user %} 
+                    {% if  mensajealeer.remitente == user.id%}
+                         <h6>De: {{user.last_name}}, {{user.first_name}} ({{user.username}})<span class="mailbox-read-time float-right">{{mensajealeer.fecha}}</span></h6>
+                    {% endif %}
+                {% endfor %}
+              </div>
+              <!-- /.mailbox-read-info -->
+              <div class="mailbox-controls with-border text-center">
+                <div class="btn-group">
+                  <a href="{% url 'borrar' mensajealeer.id %}" class="btn btn-default btn-sm" data-container="body" title="Borrar">
+                    <i class="far fa-trash-alt"></i>
+                  </a>
+                  <a href="{% url 'redactar' %}" class="btn btn-default btn-sm" data-container="body" title="Responder">
+                    <i class="fas fa-reply"></i>
+                  </a>
+                </div>
+              </div>
+              <!-- /.mailbox-controls -->
+              <div class="mailbox-read-message">
+                {{mensajealeer.mensaje}}
+              </div>
+              <!-- /.mailbox-read-message -->
+            </div>
+            <!-- /.card-body -->
+      </div>
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </section>
+{% endblock body %}

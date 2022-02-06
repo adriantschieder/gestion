@@ -14,3 +14,10 @@ def createProfile(sender, instance, created, **kwargs):
     if created:
         Perfil_Usuario.objects.create(usuario=instance)
 post_save.connect(createProfile, sender=User)
+
+class MensajeriaInterna(models.Model):
+    destinatario = models.ForeignKey(User, null= True, blank = True, on_delete=models.CASCADE)
+    remitente = models.IntegerField(null=True,blank=True)
+    asunto = models.CharField(max_length=100,null=True,blank=True)
+    mensaje = models.TextField(max_length=10000,null=True,blank=True)
+    fecha=models.DateTimeField(auto_now=True)

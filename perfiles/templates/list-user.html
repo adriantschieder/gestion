@@ -24,7 +24,7 @@
                                             <p> El usuario aun no ha compartido sus datos </p>
                                         {% endif %}
                                         <div>
-                                            <button class="btn btn-primary btn-round btn-simple">Mensaje</button>
+                                            <a href="{% url 'redactarusuario' user.id %}" class="btn btn-primary btn-round btn-simple">Mensaje</a>
                                         </div>
                                     </div>
                                 {% endif %}

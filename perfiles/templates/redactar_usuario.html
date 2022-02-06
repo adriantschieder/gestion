@@ -1,0 +1,73 @@
+{% extends 'base-perfil.html' %}
+{% block head %}
+<title>Redactar Mensaje Nuevo</title> 
+{% endblock head %}
+{% block body %}
+<!-- Main content -->
+<section class="content mt-3">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-3">
+          <a href="{% url 'bandeja' %}" class="btn btn-primary btn-block mb-3">Volver a la Bandeja</a>
+
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Bandejas</h3>
+            </div>
+            <div class="card-body p-0">
+              <ul class="nav nav-pills flex-column">
+                <li class="nav-item active">
+                  <a href="{% url 'bandeja' %}" class="nav-link">
+                    <i class="fas fa-inbox"></i> Bandeja de Entrada
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'enviados' %}" class="nav-link">
+                    <i class="far fa-envelope"></i> Enviados
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <!-- /.card-body -->
+          </div>
+        </div>
+        <!-- /.col -->
+        <div class="col-md-9">
+          <div class="card card-primary card-outline">
+            <div class="card-header">
+              <h3 class="card-title">Redactar Nuevo Mensaje</h3>
+            </div>
+            <!-- /.card-header -->
+            <form method="POST">
+                {% csrf_token %}
+                <div class="card-body">
+                <div class="form-group">
+                  <select class="form-control my-1" aria-label=".form-select-sm example" name="destinatario" id="" placeholder="Para:">
+                    <option value="{{user.id}}">Usuario: &nbsp;{{user.username}} - &nbsp;{{user.first_name}}, {{user.last_name}}</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" placeholder="Asunto:" name="asunto">
+                    <input class="form-control" name="remitente" value="{{request.user.id}}" hidden>
+                </div>
+                <div class="form-group">
+                    <textarea id="compose-textarea" name="mensaje" class="form-control" style="height: 300px"></textarea>
+                </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                <div class="float-right">
+                    <button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> Enviar</button>
+                </div>
+                </div>
+                <!-- /.card-footer -->
+            </form>
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </section>
+{% endblock body %}
