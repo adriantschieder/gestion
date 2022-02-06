@@ -3,7 +3,7 @@ from re import template
 from .models import Post
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView
-
+from .forms import Postform
 
 # Create your views here.
 
@@ -11,6 +11,7 @@ from django.views.generic import ListView, DetailView, CreateView
 class homeview(ListView):
     model= Post
     template_name = "home.html"
+    ordering = ["-fecha_publicacion"]
 
 class postdetailview(DetailView):
     model = Post
@@ -18,8 +19,9 @@ class postdetailview(DetailView):
 
 class nuevo_blog(CreateView):
     model = Post
+    form_class = Postform
     template_name = "crear_post.html"
-    fields = "__all__"
+
 
 def about(request):
     return render(request, 'about.html')

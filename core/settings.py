@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'blog',
     'social_django',
     'perfiles',
+    'ckeditor',
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
