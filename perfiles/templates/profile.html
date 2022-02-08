@@ -42,18 +42,20 @@
             <div class="tab-pane active" id="profile">
               <h6>TU PERFIL</h6>
               <hr>
-              <form class="form-horizontal" method="POST" enctype="multipart/form-data">
+              <form action="{% url 'avataractualizado' user.id %}" class="form-horizontal" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
                 <div class="form-group avatar row">
                   <figure class="figure col-md-2 col-sm-3 col-xs-12">
                       <img class="img-rounded img-responsive" src="{{ perfil.avatar.url }}" alt="" width="80" height="80">
                   </figure>
                   <div class="form-inline col-md-10 col-sm-9 col-xs-12">
-                      <input type="file" class="file-uploader pull-left" name="avataractualizado">
+                      <input type="file" class="file-uploader pull-left" name="subiravatar">
                       <button type="submit" class="btn btn-sm btn-default-alt pull-left btn-success">Subir Imagen</button>
                   </div>
                 </div>                
               </form>      
-              <form>
+              <form action="{% url 'profileactualizado' user.id %}" method="POST" formid="1">
+                {% csrf_token %}
                 <div class="form-group">
                   <label for="fullName">Nombre:</label>
                   <input type="text" class="form-control" id="first_name" name="first_name" aria-describedby="fullNameHelp" placeholder="Ingrese su nombre" value="{{user.first_name}}">
@@ -65,7 +67,11 @@
                 </div>
                 <div class="form-group">
                   <label for="email">Email</label>
-                  <input type="text" class="form-control" id="email" name="email" placeholder="su email" value="{{user.email}}">
+                  <input type="email" class="form-control" id="email" name="email" placeholder="su email" value="{{user.email}}">
+                </div>
+                <div class="form-group">
+                  <label for="location">Teléfono:</label>
+                  <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingrese su telefono" value="{{perfil.telefono}}">
                 </div>
                 <div class="form-group">
                   <label for="location">Dirección:</label>
@@ -85,30 +91,35 @@
             <div class="tab-pane" id="account">
               <h6>USUARIOS</h6>
               <hr>
-              <form>
+              <form method="POST" action="{% url 'borrarusuario' user.id %}">
+                {% csrf_token %}
                 <div class="form-group">
                   <label for="username">Usuario</label>
-                  <input type="text" class="form-control" id="username" name="username" aria-describedby="usernameHelp" placeholder="Ingrese su username" value="{{user.username}}">
-                  <small id="usernameHelp" class="form-text text-muted">After changing your username, your old username becomes available for anyone else to claim.</small>
+                  <input type="text" class="form-control" id="username" name="username" aria-describedby="usernameHelp" placeholder="Ingrese su username" value="{{user.username}}" readonly>
+                  <small id="usernameHelp" class="form-text text-muted">El nombre de la cuenta no es modificable.</small>
                 </div>
                 <hr>
                 <div class="form-group">
                   <label class="d-block text-danger">Borrar Cuenta</label>
                   <p class="text-muted font-size-sm">Si borra su cuenta, ya no podrá acceder a ningun área.</p>
                 </div>
-                <button class="btn btn-danger" type="button">Borrar Cuenta</button>
+                <button class="btn btn-danger" type="submit">Borrar Cuenta</button>
               </form>
             </div>
             <div class="tab-pane" id="security">
               <h6>OPCIONES DE SEGURIDAD</h6>
               <hr>
-              <form>
+              <form method="POST">
+                {% csrf_token %}
                 <div class="form-group">
-                  <label class="d-block">Cambiar contraseña</label>
-                  <input type="text" class="form-control" placeholder="Ingrese su contraseña actual">
-                  <input type="text" class="form-control mt-1" placeholder="Ingrese su nueva contraseña">
-                  <input type="text" class="form-control mt-1" placeholder="Confirme su nueva contraseña">
+                    {{form.as_p}}
+                    <ul>
+                      <li>Su contraseña debe tener 8 caracteres</li>
+                      <li>Su contraseña debe tener 1 al menos una letra</li>
+                      <li>Su contraseña no debe ser similar a su información personal</li>
+                      <li>Su contraseña no debe ser de uso general</li>
                 </div>
+                <button type="subdmit" class="btn btn-info">Cambiar contraseña</button>
               </form>
               <hr>
             </div>

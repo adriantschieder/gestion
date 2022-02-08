@@ -14,7 +14,7 @@ class Post(models.Model):
     titulo = models.CharField(max_length=255, null=True)
     autor = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     cuerpo = RichTextField(blank=True,null=True)
-    fecha_publicacion= models.DateField(auto_now_add=True)
+    fecha_publicacion= models.DateField(auto_now=True)
 
 
     def __str__(self):
