@@ -8,7 +8,9 @@
 
 <h1>{{post.titulo}}</h1>
 
-<small> by: {{post.autor}}<br>
+<small> by: {{post.autor}} - 
+        <a href= "{% url 'actualizar_post' post.pk %}">editar</a>- <a href= "{% url 'eliminar_post' post.pk %}">borrar</a>
+        <br>
         fecha: {{post.fecha_publicacion}}
 
 
