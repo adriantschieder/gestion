@@ -1,20 +1,26 @@
 {% extends 'base-blog.html' %}
 
-<div>
+
 {% block content %}
-<h1>Post</h1>
-<div class="d-grid gap-2 col-6 mx-auto">
-    <a href="{% url 'agregar_post' %}" class="btn btn-primary"> crear nuevo post</a>
-    
-</div>
-<ul>
-{% for post in object_list %}
-    <li><a href= "{% url 'post_detail' post.pk %}">{{post.titulo}}</a> - {{post.autor}} - {{post.fecha_publicacion}}<br/>
-    {{post.cuerpo|slice:":200"|safe}}</li>
+    <div>
+    <h1>Post</h1>
+    <div class="d-grid gap-2 col-6 mx-auto">
+        {% if user.is_authenticated %}
+        <a href="{% url 'agregar_post' %}" class="btn btn-primary"> crear nuevo post</a>
 
-{% endfor %}
-</ul>
+        {% else %}
+        
+        {% endif %}
+    </div>
+    <ul>
+    {% for post in object_list %}
+        <li><a href= "{% url 'post_detail' post.pk %}">{{post.titulo}}</a> - {{post.autor}} - {{post.fecha_publicacion}}-
+            <a href= "{% url 'actualizar_post' post.pk %}">editar</a>-<a href= "{% url 'eliminar_post' post.pk %}">borrar</a>
+            <br/>
+        {{post.cuerpo|slice:":200"|safe}}</li>
 
+    {% endfor %}
+    </ul>
+    </div>
 {% endblock %}
 
-</div>
