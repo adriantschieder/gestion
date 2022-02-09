@@ -71,19 +71,39 @@
                 </div>
                 <div class="form-group">
                   <label for="location">Teléfono:</label>
-                  <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingrese su telefono" value="{{perfil.telefono}}">
+                  <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingrese su telefono" 
+                  {% if perfil.telefono is not None %}
+                    value="{{perfil.telefono}}"
+                  {% else %}
+                    value=""
+                  {% endif %}>
                 </div>
                 <div class="form-group">
                   <label for="location">Dirección:</label>
-                  <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese su domicilio" value="{{perfil.direccion}}">
+                  <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese su domicilio" 
+                {% if perfil.telefono is not None %}
+                  value="{{perfil.direccion}}"
+                {% else %}
+                  value=""
+                {% endif %}>
                 </div>
                 <div class="form-group">
                   <label for="location">Ciudad:</label>
-                  <input type="text" class="form-control" id="ciudad" name="ciudad" placeholder="Ciudad" value="{{perfil.ciudad}}">
+                  <input type="text" class="form-control" id="ciudad" name="ciudad" placeholder="Ciudad" 
+                  {% if perfil.telefono is not None %}
+                  value="{{perfil.ciudad}}"
+                {% else %}
+                  value=""
+                {% endif %}>
                 </div>
                 <div class="form-group">
                   <label for="location">Provincia:</label>
-                  <input type="text" class="form-control" id="provincia" name="provincia" placeholder="Provincia" value="{{perfil.provincia}}">
+                  <input type="text" class="form-control" id="provincia" name="provincia" placeholder="Provincia" 
+                  {% if perfil.telefono is not None %}
+                  value="{{perfil.provincia}}"
+                {% else %}
+                  value=""
+                {% endif %}>
                 </div>
                 <button type="submit" class="btn btn-primary">Actualizar Perfil</button>
               </form>
