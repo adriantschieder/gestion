@@ -76,10 +76,16 @@
                   </td>
                   {% for user in  user %} 
                     {% if  enviado.destinatario_id == user.id%}
-                        <td class="mailbox-name"><a href="{% url 'leerenviados' enviado.id %}">{{user.last_name}}, {{user.first_name}}</a></td>
+                        <td class="mailbox-name"><a href="{% url 'leerenviados' enviado.id %}">
+                          {% if user.first_name != "" %} 
+                            {{user.last_name}}, {{user.first_name}}
+                          {%else%}
+                            {{user.username}}
+                          {% endif %}
+                        </a></td>
                     {% endif %}
                   {% endfor %}
-                  <td class="mailbox-subject"><b>{{enviado.asunto}}</b></td>
+                  <td class="mailbox-subject"><a href="{% url 'leerenviados' enviado.id %}"><b>{{enviado.asunto}}</b></a></td>
                   <td class="mailbox-attachment"></td>
                   <td class="mailbox-date">{{enviado.fecha}}</td>
                 </tr>

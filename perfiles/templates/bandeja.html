@@ -80,7 +80,7 @@
                         <td class="mailbox-name"><a href="{% url 'leermail' bandeja.id %}">{{user.last_name}}, {{user.first_name}}</a></td>
                     {% endif %}
                   {% endfor %}
-                  <td class="mailbox-subject"><b>{{bandeja.asunto}}</b></td>
+                  <td class="mailbox-subject"><a href="{% url 'leermail' bandeja.id %}"><b>{{bandeja.asunto}}</b></a></td>
                   <td class="mailbox-attachment"></td>
                   <td class="mailbox-date">{{bandeja.fecha}}</td>
                 </tr>
