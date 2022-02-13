@@ -1,4 +1,4 @@
-{% extends 'base-blog.html' %}
+{% extends 'base.html' %}
 
 {% block title %}
 {{post.titulo}}
@@ -6,19 +6,56 @@
 
 {% block content %}
 
-<h1>{{post.titulo}}</h1>
+        <h1 class="mt-3 text-white">{{post.titulo}}</h1>
 
-<small> by: {{post.autor}} - 
-        <a href= "{% url 'actualizar_post' post.pk %}">editar</a>- <a href= "{% url 'eliminar_post' post.pk %}">borrar</a>
+        <small class="mt-3 text-white"> by: {{post.autor}} - 
+                {% if user.id == post.autor.id %}
+                <a href= "{% url 'actualizar_post' post.pk %}">editar</a>- <a href= "{% url 'eliminar_post' post.pk %}">borrar</a>
+                {% endif %}
+                <br>
+                fecha: {{post.fecha_publicacion}}
+
+
+
+        </small><br>
+        {% if post.portada_post %}
+        <img src = "{{post.portada_post.url}}">
+        {% endif %}
+        <a class="mt-3 text-white"> {{post.cuerpo|safe}}</a><br>
         <br>
-        fecha: {{post.fecha_publicacion}}
+        <form action = "{% url 'like' post.pk %}"
+        method = "POST">
+                {% csrf_token %}
+                <button type = "submit" name = "post_id", value = "{{post.id}}", class = "btn btn-primary btn-sm">me gusta</button> <a class="mt-3 text-white">{{total_likes}}- me gusta</a> 
+        </form>
+        <br>
+        <hr>
+
+        <h2>Comentarios...</h2>
+        <ul class="mt-3 text-white">
+                {% if not post.comentarios.all %}
+                        no hay comentarios todavia...<br>
+                        <a href=" {% url 'crear_comentario' post.pk %} ">Agregar comentario </a>
+
+                {% else %}
+                        <a href=" {% url 'crear_comentario' post.pk %} ">Agregar comentario </a>
+                        {% for comentario in post.comentarios.all %}
+                                <strong>
+                                        {{comentario.nombre}}-
+                                        {{comentario.fecha}} -<br>
+                                        {{comentario.autor}} -<br>
+                                </strong>
+                                <br>
+                                        <a>{{comentario.cuerpo|safe}}</a>
+                                <br>
+                        {% endfor %}
+
+                {% endif %}
+
+        </ul>
+        <br>
+        <br>
+        <a href="{% url 'home' %}" class="btn btn-primary"> Atras</a>
 
 
-
-</small><br>
-
-<a> {{post.cuerpo|safe}}</a><br>
-<a href="{% url 'home' %}" class="btn btn-primary"> Atras</a>
 {% endblock %}
-
-{{post.cuerpo}}

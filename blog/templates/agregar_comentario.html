@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %} 
+Crear comentario
+{% endblock %}
+
+{% block content %}
+
+    <body>
+        <div  class="mt-3 text-white">
+            <div  class="form-group">
+                <form method="POST"> 
+                    {% csrf_token %}
+                    {{form.media}}
+                    {{ form.as_p }}
+                    
+                    <input type="submit" value= "enviar">
+
+            </form>
+            </div>
+        </div>
+    </body>
+    </html>
+   
+    
+
+    {% endblock %}

@@ -1,4 +1,4 @@
-{% extends 'base-blog.html' %}
+{% extends 'base.html' %}
 
 {% block title %} 
 Editar post
@@ -14,19 +14,29 @@ Editar post
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
+    <ul class="mt-3 text-white">
+        {% if user.is_authenticated %}
+            {% if user.id == post.autor.id %}
+            <body>
 
-    <div class="form-group">
-        <form method="POST"> 
-            {% csrf_token %}
-            {{form.media}}
-            {{ form.as_p }}
-            
-            <input type="submit" value= "actualizar">
+                <div class="form-group">
+                    <form method="POST"> 
+                        {% csrf_token %}
+                        {{form.media}}
+                        {{ form.as_p }}
+                        
+                        <input type="submit" value= "actualizar">
 
-        </form>
-    </div>
-</body>
-</html>
+                    </form>
+                </div>
+            </body>
+            </html>
+            {% else %}
+            no tiene permiso de edicion...
+            {% endif %}
+        {% else %}
+        no tiene permiso de edicion...
 
+        {% endif %}
+    </ul>
 {% endblock %}

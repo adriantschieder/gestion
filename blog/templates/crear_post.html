@@ -1,4 +1,4 @@
-{% extends 'base-blog.html' %}
+{% extends 'base.html' %}
 
 {% block title %} 
 Crear blog
@@ -14,19 +14,24 @@ Crear blog
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
+    {% if user.is_authenticated %}
+    <body>
+        <div  class="mt-3 text-white">
+            <div class="form-group">
+                <form action="../../blog/agregar_post/"  method="POST" enctype = "multipart/form-data"> 
+                    {% csrf_token %}
+                    {{form.media}}
+                    {{ form.as_p }}
+                    
+                    <input type="submit" value= "enviar">
 
-    <div class="form-group">
-        <form action="../../blog/agregar_post/"  method="POST"> 
-            {% csrf_token %}
-            {{form.media}}
-            {{ form.as_p }}
-            
-            <input type="submit" value= "enviar">
-
-    </form>
-    </div>
-</body>
-</html>
+            </form>
+            </div>
+        </div>
+    </body>
+    </html>
+    {% else %}
+    no tiene permitido crear un post...
+    {% endif %}
 
 {% endblock %}
