@@ -23,11 +23,14 @@
         {% endif %}
         <a class="mt-3 text-white"> {{post.cuerpo|safe}}</a><br>
         <br>
-        <form action = "{% url 'like' post.pk %}"
-        method = "POST">
-                {% csrf_token %}
-                <button type = "submit" name = "post_id", value = "{{post.id}}", class = "btn btn-primary btn-sm">me gusta</button> <a class="mt-3 text-white">{{total_likes}}- me gusta</a> 
-        </form>
+        {%if user.is_authenticated %}
+
+                <form action = "{% url 'like' post.pk %}"
+                method = "POST">
+                        {% csrf_token %}
+                        <button type = "submit" name = "post_id", value = "{{post.id}}", class = "btn btn-primary btn-sm">me gusta</button> <a class="mt-3 text-white">{{total_likes}}- me gusta</a> 
+                </form>
+        {% endif %}
         <br>
         <hr>
 
@@ -35,10 +38,14 @@
         <ul class="mt-3 text-white">
                 {% if not post.comentarios.all %}
                         no hay comentarios todavia...<br>
-                        <a href=" {% url 'crear_comentario' post.pk %} ">Agregar comentario </a>
+                        {% if user.is_authenticated %}
+                                <a href=" {% url 'crear_comentario' post.pk %} ">Agregar comentario </a>        
+                        {% endif %}
 
                 {% else %}
-                        <a href=" {% url 'crear_comentario' post.pk %} ">Agregar comentario </a>
+                        {% if user.is_authenticated %}
+                                <a href=" {% url 'crear_comentario' post.pk %} ">Agregar comentario </a>
+                        {% endif %}
                         {% for comentario in post.comentarios.all %}
                                 <strong>
                                         {{comentario.nombre}}-
