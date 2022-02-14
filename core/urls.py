@@ -27,7 +27,7 @@ urlpatterns = [
     path("blog/", include("blog.urls")),
     path('', index, name='index' ),
     path('about', about, name='about'),
-    path('contact', contact, name='contact'),
+    path('contact', contact.as_view(),  name='contact'),
     path('social-auth/', include('social_django.urls', namespace="social")),
     path('perfiles/', include('perfiles.urls')),
 ]

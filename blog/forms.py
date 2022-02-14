@@ -1,5 +1,6 @@
+from tkinter import Widget
 from django import forms
-from .models import Comentario, Post
+from .models import Comentario, Post, Contacto
 
 class Postform(forms.ModelForm):
     class Meta():
@@ -36,4 +37,19 @@ class Crear_comentario(forms.ModelForm):
 
         widgets = {
             "cuerpo": forms.Textarea(attrs= {"class": "form-control"}),
+        }
+
+
+class Contacto(forms.ModelForm):
+
+    class Meta():
+        model = Contacto
+        fields = ("nombre", "numero_telefono", "email", "cuerpo")
+
+        Widgets = {
+            "nombre": forms.TextInput(attrs= {"class": "form-control"}),
+            "numero_telefono": forms.NumberInput(attrs= {"class": "form-control"}),
+            "email": forms.EmailInput(attrs= {"class": "form-control"}),
+            "cuerpo": forms.Textarea(attrs= {"class": "form-control"}),
+
         }

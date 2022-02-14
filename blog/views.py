@@ -5,10 +5,10 @@ from re import template
 from urllib import request
 
 from django.urls import reverse_lazy, reverse
-from .models import Post, Comentario
+from .models import Post, Comentario, Contacto
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView,UpdateView,DeleteView
-from .forms import Postedit, Postform, Crear_comentario
+from .forms import Postedit, Postform, Crear_comentario, Contacto
 from django.http import HttpResponseRedirect
 
 # Create your views here.
@@ -43,8 +43,14 @@ class nuevo_blog(CreateView):
 
 def about(request):
     return render(request, 'about.html')
-def contact(request):
-    return render(request, 'contact.html')
+
+
+
+class contact(CreateView):
+    model = Contacto
+    form_class = Contacto
+    template_name = "contact.html"
+    
 
 
 class actualizar_post(UpdateView):

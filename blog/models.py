@@ -41,3 +41,11 @@ class Comentario(models.Model):
 
     def __str__(self) -> str:
         return "%s- %s" % (self.post.titulo, self.cuerpo)
+
+
+
+class Contacto(models.Model):
+    nombre = models.CharField(max_length=255)
+    numero_telefono = models.IntegerField()
+    email = models.EmailField()
+    cuerpo = RichTextField()

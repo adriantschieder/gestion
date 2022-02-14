@@ -30,9 +30,28 @@
           <a class="p-2 text-dark" href="{% url 'index' %}">Inicio</a>
           <a class="p-2 text-dark" href="{% url 'about' %}">Quienes Somos</a>
           <a class="p-2 text-dark" href="{% url 'contact' %}">Contacto</a>
-          <a class="p-2 text-dark" href="#">Precios</a>
+          
         </nav>
-        <a class="btn btn-outline-info" href="{% url 'login' %}">Iniciar Sesión</a>
+        {%if user.is_authenticated %}
+          <p class="text-white mt-3">{{mensajebienvenida}}</p>
+                    <img src="{{ avatar1 }}" class="rounded-circle mr-3" alt="" width="40" height="40">
+          <div class="btn-group">
+            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-user"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+              <a class="dropdown-item" href="{% url 'perfil' user.id %}">Ver Perfil</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{% url 'list-user' %}">Usuarios</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{% url 'bandeja' %}">Mensajes</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{% url 'logout' %}">Salir</a>
+            </div>
+        </div>
+          {% else %}
+            <a class="btn btn-outline-info" href="{% url 'login' %}">Iniciar Sesión</a>
+          {% endif %}
       </div>
       {% block container %}
       {% endblock container %}
@@ -41,7 +60,26 @@
 
       {% endblock %}
       <footer class="pt-4 my-md-5 pt-md-5 border-top">
-        
+        <div class="row">
+          <div class="col-6 col-md">
+            <strong>
+              <a href="{% url 'index' %}">Inicio</a>
+            </strong>
+            
+          </div>
+          <div class="col-6 col-md">
+            <strong>
+              <a href="{% url 'home' %}">Blog</a>
+            </strong>
+            
+          </div>
+          <div class="col-6 col-md">
+            <strong>
+              <a href="{% url 'contact' %}">Contactanos!</a>
+            </strong>
+            
+          </div>
+        </div>
       </footer>
     </div>
 
