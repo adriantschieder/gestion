@@ -21,6 +21,14 @@ la maquinaria en la cual se va a efectuar el arreglo. Para ello, puede ir desde 
 
 La app blog es para el proyecto final.
 ## Trabajan en este proyecto 🛠️
-* Adrian Tschieder - Trabajo Inicial y Arreglos - adriantschieder
-* Andriel Scheffer - Maquinarias - adrielscheffer
+* Adrian Tschieder - login, panel interno, perfil y mensajeria - adriantschieder
+* Andriel Scheffer - Maquinarias, blog - adrielscheffer
+
+#importante
+instalar ckeditor
+pip install django-ckeditor
+
+instalar social-django 
+pip install -r requirements.txt
+
 
