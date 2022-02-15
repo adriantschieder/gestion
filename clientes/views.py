@@ -231,7 +231,8 @@ def register(request):
         if form.is_valid():
             usuario = form.cleaned_data['username']
             form.save()
-            return render(request, 'index-admin.html', {"mensaje": f'Bienvenido {usuario}'})
+            return redirect('/clientes/listado')
+            # return render(request, 'index-admin.html', {"mensaje": f'Bienvenido {usuario}', "user": request.user})
     else:
         # form = UserCreationForm()
         form = registro()

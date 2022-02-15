@@ -1,13 +1,14 @@
-{% extends 'base.html' %}
+{% extends 'base-blog.html' %}
 
 
 
 {% block content %}
+<div class="col-12 ml-5">
         <title>{{post.titulo}}</title>
 
-        <h1 class="mt-3 text-white">{{post.titulo}}</h1>
+        <h1 class="mt-3 ">{{post.titulo}}</h1>
 
-        <small class="mt-3 text-white"> by: {{post.autor}} - 
+        <small class="mt-3"> by: {{post.autor}} - 
                 {% if user.id == post.autor.id %}
                 <a href= "{% url 'actualizar_post' post.pk %}">editar</a>- <a href= "{% url 'eliminar_post' post.pk %}">borrar</a>
                 {% endif %}
@@ -20,7 +21,7 @@
         {% if post.portada_post %}
         <img src = "{{post.portada_post.url}}">
         {% endif %}
-        <a class="mt-3 text-white"> {{post.cuerpo|safe}}</a><br>
+        <a class="mt-3 "> {{post.cuerpo|safe}}</a><br>
         <br>
         {%if user.is_authenticated %}
 
@@ -63,6 +64,7 @@
         <br>
         <br>
         <a href="{% url 'home' %}" class="btn btn-success"> Atras</a>
+<div>
 
 
 {% endblock %}

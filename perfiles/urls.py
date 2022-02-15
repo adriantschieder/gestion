@@ -1,7 +1,5 @@
 from django.urls import path
-from .views import (
-     avataractualizado, bandeja, borrar, enviados, leerenviados, leermail, 
-     profile, list_user, redactar, redactarmail,profileactualizado, borrarusuario, )
+from .views import (avataractualizado, bandeja, borrar, enviados, leerenviados, leermail, profile, list_user, redactar, redactarmail,profileactualizado, borrarusuario)
 from django.contrib.auth.views import PasswordResetView, PasswordResetConfirmView, PasswordResetCompleteView, PasswordResetDoneView
 
 

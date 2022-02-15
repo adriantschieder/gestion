@@ -1,4 +1,3 @@
-from attrs import fields
 from django.contrib.auth.forms import PasswordChangeForm
 from django import forms
 

@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
-
-
 {% block content %}
-    <title>Blog</title>
+<div class="col12 d-flex justify-content-center ">
+    <title class="text-white">Blog</title>
     <div class="mt-3 text-white">
         <h1 class = "ml-3  mt-3">Post</h1>
         
@@ -10,7 +9,7 @@
         <div class="mt-3 text-white">
 
             {% if user.is_authenticated %}
-            <a href="{% url 'agregar_post' %}" class="btn btn-success"> crear nuevo post</a>
+            <a href="{% url 'agregar_post' %}" class="btn btn-success"> Crear nuevo post</a>
 
             {% else %}
             
@@ -19,7 +18,7 @@
         
         <ul>
         {% for post in object_list %}
-            <li class="ml-3  mt-3">
+            <li class="ml-3  mt-3 bg-light border-rounded p-4 text-dark">
                 
                 
                 
@@ -34,13 +33,23 @@
                 <br/>
                 {% endif %}
                 <br>
-            {{post.cuerpo|slice:":200"|safe}}<br>
-            <a class="btn btn-success" href= "{% url 'post_detail' post.pk %}">leer mas</a>
+                <div class="row">
+                <div class="col-3">
+                    <img src="/media/{{post.portada_post}}" alt="" width="150" height="150">
+                </div>
+                <div class="col-9">
+                    {{post.cuerpo|slice:":200"|safe}}<br>
+                </div>
+                </div>
+            
+            
+            <a class="btn btn-success mt-3" href= "{% url 'post_detail' post.pk %}">leer mas</a>
 
             </li>
 
         {% endfor %}
         </ul>
     </div>
+</div>
 {% endblock %}
 
