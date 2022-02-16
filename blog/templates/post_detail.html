@@ -28,14 +28,14 @@
                 <form action = "{% url 'like' post.pk %}"
                 method = "POST">
                         {% csrf_token %}
-                        <button type = "submit" name = "post_id", value = "{{post.id}}", class = "btn btn-success">me gusta</button> <a class="mt-3 text-white">{{total_likes}}- me gusta</a> 
+                        <button type = "submit" name = "post_id", value = "{{post.id}}", class = "btn btn-success">me gusta</button> <a class="mt-3">{{total_likes}}- me gusta</a> 
                 </form>
         {% endif %}
         <br>
         <hr>
 
         <h2>Comentarios...</h2>
-        <ul class="mt-3 text-white">
+        <ul class="mt-3">
                 {% if not post.comentarios.all %}
                         no hay comentarios todavia...<br>
                         {% if user.is_authenticated %}
